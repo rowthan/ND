@@ -73,7 +73,7 @@ app.use(expressValidator()); //验证
 // app.use(cookieParser());//不需要也能够实现
 app.use(session({
     resave: true,
-    name:'connect',//cookiename
+    name:'nd',//cookiename
     cookie: {maxAge: 60*60*24*1000 },
     saveUninitialized: true,
     secret: process.env.SESSION_SECRET,
