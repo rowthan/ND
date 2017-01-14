@@ -1,0 +1,177 @@
+extends layout
+block head
+  link(href='//fonts.googleapis.com/css?family=Lato', rel='stylesheet', type='text/css')
+  link(href='//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css', rel='stylesheet')
+  link(rel='stylesheet', href='http://jplist.com/content/css/vendor/normalize.css')
+  link(rel='stylesheet', href='http://jplist.com/content/css/styles.min.css?v=9')
+  link(href='/content/img/common/favicon.png', rel='shortcut icon')
+  link(href='http://jplist.com/content/css/jplist.demo-pages.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.core.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.filter-toggle-bundle.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.pagination-bundle.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.history-bundle.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.textbox-filter.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.jquery-ui-bundle.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.preloader-control.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.start-rating-control.min.css', rel='stylesheet', type='text/css')
+  link(href='http://jplist.com/content/css/jplist.views-control.min.css', rel='stylesheet', type='text/css')
+
+block content
+  .box.main
+    .center
+      #demo.box.jplist
+        // ios button: show/hide panel
+        .jplist-ios-button
+          i.fa.fa-sort
+          | 		排序
+        // panel
+        .jplist-panel.box.panel-top
+          // reset button
+          button.jplist-reset-btn(type='button', data-control-type='reset', data-control-name='reset', data-control-action='reset')
+            | 重置  
+            i.fa.fa-share
+          .jplist-drop-down(data-control-type='items-per-page-drop-down', data-control-name='paging', data-control-action='paging')
+            ul
+              li
+                span(data-number='5')  每页5条
+              li
+                span(data-number='10', data-default='true')  每页10条
+              li
+                span(data-number='15')  每页15条
+              li
+                span(data-number='all')  查看所有
+          .jplist-drop-down(data-control-type='sort-drop-down', data-control-name='sort', data-control-action='sort')
+            ul
+              li
+                span(data-path='default') 排序
+              li
+                span(data-path='.title', data-order='asc', data-type='text') 标题 A-Z
+              li
+                span(data-path='.title', data-order='desc', data-type='text') 标题 Z-A
+              li
+                span(data-path='.desc', data-order='asc', data-type='text') 内容 A-Z
+              li
+                span(data-path='.desc', data-order='desc', data-type='text') 内容 Z-A
+              li
+                span(data-path='.like', data-order='asc', data-type='number', data-default='true') 最多喜欢
+              li
+                span(data-path='.like', data-order='desc', data-type='number') 最少喜欢
+              li
+                span(data-path='.date', data-order='asc', data-type='datetime') 最早
+              li
+                span(data-path='.date', data-order='desc', data-type='datetime') 最新
+          // filter by title
+          .text-filter-box
+            i.fa.fa-search.jplist-icon
+            //if lt IE 10
+              .jplist-label Filter by Title:
+            input(data-path='.title', type='text', value='', placeholder='题目查找', data-control-type='textbox', data-control-name='title-filter', data-control-action='filter')
+          // filter by description
+          .text-filter-box
+            i.fa.fa-search.jplist-icon
+            //if lt IE 10
+              .jplist-label Filter by Description:
+            input(data-path='.desc', type='text', value='', placeholder='内容查找', data-control-type='textbox', data-control-name='desc-filter', data-control-action='filter')
+          // views
+          .jplist-views(data-control-type='views', data-control-name='views', data-control-action='views', data-default='jplist-list-view')
+            button.jplist-view.jplist-list-view(type='button', data-type='jplist-list-view')
+            button.jplist-view.jplist-grid-view(type='button', data-type='jplist-grid-view')
+            button.jplist-view.jplist-thumbs-view(type='button', data-type='jplist-thumbs-view')
+          // pagination results
+          .jplist-label(data-type='第 {current} 页of {pages}', data-control-type='pagination-info', data-control-name='paging', data-control-action='paging')
+          // pagination
+          .jplist-pagination(data-control-type='pagination', data-control-name='paging', data-control-action='paging')
+        // data
+        .list.box.text-shadow
+          // item
+          each item in genius
+            .list-item.box
+              // img
+              .img.left
+                img(src='#{item.postpic}', data-original='/content/img/thumbs-450/arch-2.jpg', alt='', title='')
+              // data
+              .block.right
+                p.date #{moment(item.createAt).format('MM/DD/YYYY-HH:mm')}
+                p.title #{item.posttitle}
+                p.desc
+                  | !{item.abstract}
+                  a(href="/detail/"+item._id) 查看
+                p.like #{item.like_count}
+        .box.jplist-no-results.text-shadow.align-center
+          p 没有帖子
+        // ios button: show/hide panel
+        .jplist-ios-button
+          i.fa.fa-sort
+          | 		jPList Actions
+        // panel
+        //.jplist-panel.box.panel-bottom
+        //  .jplist-drop-down(data-control-type='items-per-page-drop-down', data-control-name='paging', data-control-action='paging', data-control-animate-to-top='true')
+        //    ul
+        //      li
+        //        span(data-number='5')  5 per page
+        //      li
+        //        span(data-number='10', data-default='true')  10 per page
+        //      li
+        //        span(data-number='15')  15 per page
+        //      li
+        //        span(data-number='all')  View All
+        //  .jplist-drop-down(data-control-type='sort-drop-down', data-control-name='sort', data-control-action='sort', data-control-animate-to-top='true')
+        //    ul
+        //      li
+        //        span(data-path='default') Sort by
+        //      li
+        //        span(data-path='.title', data-order='asc', data-type='text') Title A-Z
+        //      li
+        //        span(data-path='.title', data-order='desc', data-type='text') Title Z-A
+        //      li
+        //        span(data-path='.desc', data-order='asc', data-type='text') Description A-Z
+        //      li
+        //        span(data-path='.desc', data-order='desc', data-type='text') Description Z-A
+        //      li
+        //        span(data-path='.like', data-order='asc', data-type='number') Likes asc
+        //      li
+        //        span(data-path='.like', data-order='desc', data-type='number') Likes desc
+        //      li
+        //        span(data-path='.date', data-order='asc', data-type='datetime') Date asc
+        //      li
+        //        span(data-path='.date', data-order='desc', data-type='datetime') Date desc
+        //  // pagination results
+        //  .jplist-label(data-type='{start} - {end} of {all}', data-control-type='pagination-info', data-control-name='paging', data-control-action='paging')
+        //  // pagination
+        //  .jplist-pagination(data-control-type='pagination', data-control-name='paging', data-control-action='paging', data-control-animate-to-top='true')
+      // end of demo
+
+block script
+  // js
+  script(src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js')
+  script(src='http://jplist.com/content/js/vendor/modernizr.min.js')
+  script(src='http://jplist.com/content/js/vendor/jquery.lazyload.min.js')
+  script(src='http://jplist.com/content/js/website.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.core.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.counter-control.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.filter-dropdown-bundle.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.filter-toggle-bundle.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.history-bundle.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.jquery-ui-bundle.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.pagination-bundle.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.sort-bundle.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.textbox-filter.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.views-control.min.js')
+  script(src='http://jplist.com/content/js/jplist/jplist.start-rating-control.min.js')
+  script.
+    $('document').ready(function () {
+      $('#demo').jplist({
+        //main options
+        itemsBox: '.list'
+        , itemPath: '.list-item'
+        , panelPath: '.jplist-panel'
+        //save plugin state
+        , storage: 'localstorage' //'', 'cookies', 'localstorage'
+        , storageName: 'views'
+        //this code occurs on every jplist action
+        , redrawCallback: function (collection, $dataview, statuses) {
+          //init lazy load on a filtered set of elements
+          $('.list-item img').lazyload();
+        }
+      });
+    });

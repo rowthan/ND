@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .container-fluid(style="margin-top:50px;padding:15px 30px")
+    form(method='POST')
+      legend 忘记密码
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        p 输入您的注册邮箱地址
+        label.control-label(for='email') Email
+        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+      .form-group
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-key
+          | 重置

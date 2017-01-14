@@ -1,0 +1,75 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/css/search.min.css')
+
+block content
+  .container-fluid.main
+    #wrapper
+      // 品牌列表开始
+      .brand-list
+        #brand-waterfall.brand-bd.cle
+          // 循环字母模块 item
+          #brand-a.item
+            p
+              img(src='http://t11.baidu.com/it/u=2891725966,3268004445&fm=58', style='width:100%;')
+            p.margin-clear
+              label.text-color-bg1  搜索词：
+              label #{keyword}
+            p.margin-clear
+              label.text-color-bg1 标题相关：
+              label #{posttitle.length}
+            p.margin-clear
+              label.text-color-bg1 内容相关：
+              label #{postbody.length}
+            p.margin-clear
+              label.text-color-bg1 标签相关：
+              label #{tags.length}
+          #brand-c.item
+            h3 标题
+            if(!posttitle.length)
+              p 没有搜索到相关标题.....
+                a(href="/post") 建立一个？
+            each item in posttitle
+              p
+                a(href='/detail/#{item._id}' target="_blank") #{item.posttitle}
+          #brand-d.item
+            h3 内容
+            if(!postbody.length)
+              p 没有搜索到相关内容.....
+                a(href="/post") 建立一个？
+            each item in postbody
+              p
+                a(href='/detail/#{item._id}' target="_blank") #{item.posttitle}
+          #brand-e.item
+            h3 标签
+            if(!tags.length)
+              p 没有搜索到相关标签.....
+            each item in tags
+              p
+                a(href='/tagsview?tag=#{item.name}' target="_blank") #{item.name}
+          #brand-f.item
+            h3 用户
+            p 不支持搜索.....
+            //each item in user
+            //  p
+            //    a(href='/tagsview?tag=#{item.name}') #{item.name}
+
+  .htmleaf-container(style="position:fixed;height:100vh;width:100vw;z-index:-1")
+
+
+block script
+  script(type='text/javascript', src='/js/search.js')
+  script.
+    $('#brand-waterfall').cascade();
+
+
+  //背景特效
+  script(src='/plugin/line/jparticle.jquery.js')
+  script.
+    $(function () {
+      $(".htmleaf-container").jParticle({
+        background: "none",
+        color: "#D9D9D9"
+      });
+    });
+

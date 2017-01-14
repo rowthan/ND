@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    //响应式必须
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='csrf-token', content=_csrf)
+    meta(name='baidu-site-verification', content='8zsdoId4SO')
+    meta(name='title', content='脑洞-好点子分享,脑洞搜索 - 脑洞首页 - 脑洞打开')
+    meta(name='keywords', content='脑洞,脑洞一下,脑洞大开,脑洞分享')
+    meta(name='description', content='脑洞分享平台,提供脑洞分享,脑洞发掘,脑洞搜索')
+
+
+    title #{title}-分享您的奇思妙想-脑洞一下
+    link(rel='stylesheet', href='/plugin/bootstrap/css/bootstrap.css')
+    link(rel='stylesheet', href='/fonts/iconfont.css')
+    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='/css/responsive.min.css')
+    //link(href='/css/header.min.css', rel='stylesheet')
+
+    link(href='/fonts/font-awesome.css', rel='stylesheet')
+    block head
+
+  body
+    //if lt IE 7
+        p.browsehappy
+          | 你正在使用一个
+          strong
+            | 过时
+          | 的浏览器。请到
+          a(href='http://browsehappy.com/')
+            | 这个网站
+          | 更新您的浏览器以便获取更好的视觉效果。
+    include partials/header
+
+    include partials/flash
+
+    block content
+
+    include partials/footer
+
+    block script
+
+

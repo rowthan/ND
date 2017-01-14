@@ -1,0 +1,257 @@
+extends ../layout
+block head
+  link(rel='stylesheet', href='/css/userinfo.min.css', type='text/css', media='screen')
+  link(rel='stylesheet', href='/css/userinfo_banner.min.css', type='text/css', media='screen')
+  link(rel='stylesheet', href='/css/userinfo_animation.min.css', type='text/css', media='screen')
+
+block content
+
+
+  #wrapper
+    // BIO TITLE
+    h2#titleName.sectionHead #{userinfo.profile.name}
+    .container-fluid
+      .col
+        div(style='background:url(/img/c4.jpg) center center; background-size:cover')
+          .wrapper-lg.bg-white-opacity
+            .row.m-t
+              .col-md-5
+                a.thumb-lg.pull-left.m-r(href='')
+                  img.img-circle(src='#{userinfo.profile.picture}')
+                .clear.m-b
+                  .m-b.m-t-sm
+                    span.h3.text-black  #{userinfo.profile.location}
+                    small.m-l
+              //.col-md-3
+              //  p.m-b
+              //    a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+              //      i.fa.fa-twitter
+              //    a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+              //      i.fa.fa-facebook
+              //    a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+              //      i.fa.fa-google-plus
+              //  a.btn.btn-sm.btn-success.btn-rounded(href='') Follow
+              //.col-md-4
+              //  .pull-right.pull-none-xs.text-center
+              //    a.m-b-md.inline.m(href='')
+              //      span.h3.block.font-bold
+              //      small
+              //    a.m-b-md.inline.m(href='')
+              //      span.h3.block.font-bold
+              //      small Following
+    // BIO
+    #bio
+      //h2 个人简介
+      // SOCIAL LINKS
+      p
+        | 最新/热 发表的帖子
+
+    // end bio
+    .clear
+    // SKILLS TITLE
+    //h2#tools.sectionHead 用户活动
+    //// SKILLS
+    //ul#skills
+    //  // ////////////////////////////////////////////////////////////////////////////////////
+    //  // Notice the class names indicate the % of your skills. i.e. s70 = 70%, s40 = 40% etc.
+    //  // ////////////////////////////////////////////////////////////////////////////////////
+    //  li#skill1.s90
+    //    span 1
+    //  li#skill2.s70
+    //    span 3
+    //  li#skill3.s100
+    //    span 2
+    //.clear
+    // EXPERIENCE TITLE
+    //h2#clock.sectionHead 他的热评
+    //// EXPERIENCE
+    //ul#jobs
+    //  li
+    //    .details
+    //      h3 Current Company
+    //      h4 Overlord - City, State
+    //      h5 Jul 2008 - Present
+    //    p
+    //      |
+    //  li
+    //    .details
+    //      h3 Some Other Company
+    //      h4 Lead Front-End Developer - City, State
+    //      h5 Jan 2010 - Jan 2011
+    //    p
+    //      | roin pharetra sodales pellentesque.
+    //  li
+    //    .details
+    //      h3 Another Company
+    //      h4 Creative Director - City, State
+    //      h5 Jun 2008 - Dec 2009
+    //    p
+    //      | . Proin pharetra sodales pellentesque.
+    //// end jobs
+    //// EDUCATION TITLE
+    //.clear
+    h2#learn.sectionHead 他的帖子
+    // EDUCATION
+    ul#schools
+      each item in posts
+        li(style="border-bottom:1px solid #E5E5E5; padding-bottom:15px")
+          .details
+            h3 #{item.posttitle}
+            h4
+              a(href="/detail/#{item._id}") 进入查看
+            h5 #{moment(item.createAt).format('MM/DD-hh:mm')}
+          p.postbody
+            | !{item.abstract}
+          .clear
+
+    // end schooling
+    .clear
+    //// HONORS / AWARDS TITLE
+    //h2#ribbon.sectionHead Honors & Awards
+    //// HONORS / AWARDS
+    //ul#honorsAwards
+    //  li Academy Award for Best Sound Design in a Bathroom
+    //  li Emmy Award for Most Used Extra in a Drama
+    //  li Grammy Award for Best Use of a Goat in a Soundtrack
+    //  li S.A.G. Award for Touching the Ground
+    //  li Presented with the Honor of Throwing Pies at Donald Trump
+    //  li Featured in Dog & Country Monthly (issue 298, pg. 20)
+    //// end honorsAwards
+    //.clear
+    // AS SEEN ON TITLE
+    //h2#eye.sectionHead 用户照片墙
+    //// AS SEEN ON
+    //ul#seenOn
+    //  li.bwWrapper
+    //    img(src='images/logos/abduzeedo.jpg', alt='Abduzeedo')
+    //  li.bwWrapper
+    //    img(src='images/logos/logo.png', alt='Awwwards')
+    //  li.bwWrapper
+    //    img(src='images/logos/creattica.png', alt='Creattica')
+    //  li.bwWrapper
+    //    img(src='images/logos/css_mania.png', alt='CSS Mania')
+    //  li.bwWrapper
+    //    img(src='images/logos/designers_couch.png', alt='Designers Couch')
+    //  li.bwWrapper
+    //    img(src='images/logos/dribbble.png', alt='Dribbble')
+    //// end seenOn
+    //.clear
+    //// RECOMMENDATIONS TITLE
+    h2#chat.sectionHead 他的留言
+    ul#recommends
+      li
+        h3 最新留言
+      each item in messages
+        li
+          .details
+            h3 #{moment(item.createAt).format('MM/DD-HH:mm')}
+            h4 #{item.from.profile.name}
+          p
+            | " #{item.message}
+      //li
+      //  h3 Some Other Company
+    .clear
+     //CONTACT TITLE
+    h2#contact.sectionHead 给她留言
+    // CONTACT FORM
+    #contactform.contact
+      form(method='post' action='/sendMessage')
+        //#contactInfo
+        //  if !user
+        //    p
+        //      label.smallInput(for='name')
+        //        | Name
+        //        span.required *
+        //      br
+        //      input#name.input.round3(type='text', name='name', value='')
+        //    p
+        //      label.smallInput(for='email')
+        //        | Email
+        //        span.required *
+        //      br
+        //      input#email.input.round3(type='text', name='email', value='')
+        //    p
+        //      label.smallInput(for='phone') Phone
+        //      br
+        //      input#phone.input.round3(type='text', name='phone', value='')
+        input(type='hidden', name='_csrf', value=_csrf)
+        input(type='hidden', name='to', value=userinfo._id)
+        p#emailMessage
+          label.smallInput(for='message')
+            | 留言
+            span.required *
+          br
+          textarea#message.input.round3(name='message' style="border:1px solid black")
+        // EMAIL SUBJECT
+        //input#subject(name='subject', type='hidden', value='Resume Email Message')
+        //// YOUR EMAIL ADDRESS
+        //input#repemail(name='repemail', type='hidden', value='you@yourdomain.com')
+        //// ENTER YOUR URL BELOW: MUST CONTAIN #contact AT THE END OF THE URL
+        //input#pagelink(name='pagelink', type='hidden', value='http://www.themolitor.com/applicant#contact')
+        input#submit_btn.round3.clearRight(name='留言', type='submit', value='留言')
+    //    p#required
+    //      span.required *
+    //
+    //// end contact form
+    //p#messageSent Message sent. Thank you!
+    .clear
+  .banner.enterplorer-banner
+    // 背景square
+    ul.bg-bubbles
+      li
+      li
+      li
+      li
+      li
+      li
+      li
+      li
+      li
+      li
+block script
+  script(src='/js/userinfo.js')
+  //h3 用户信息
+  //.row
+  //    .col-sm-6
+  //      h4 用户名： #{user.profile.name}
+  //      h4 性别：
+  //        if user.profile.gender == 'male'
+  //          | 男
+  //        else if user.profile.gender == 'female'
+  //          | 女
+  //        else
+  //          | 未知
+  //      h4 个人网站/微博
+  //        a(href="http://#{user.profile.website}") #{user.profile.website}
+  //    .col-sm-6
+  //      each item in post
+  //        h4 #{item.posttitle}
+  //        p #{item.postbody}
+
+//  small.label.label-primary #{item.userId.profile.name}
+        //  small #{moment(item.createAt).format('YY/MM/DD HH:mm:ss')}
+        //  small #{moment(item.updateAt).format('YY/MM/DD HH:mm:ss')}
+        //p #{item.postbody}
+        //p
+        //  a.btn.btn-default(href='/detail/#{item._id}', role='button') 查看 »
+//.col-sm-6
+//  h2 Heading
+//  p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+//  p
+//    a.btn.btn-default(href='#', role='button') View details »
+//
+//.col-sm-12
+//  #team
+//    #teamContent.divList
+//      .teamContent1
+//        h1.commonTitle
+//          span WIR SIND
+//          br
+//          span VOXELAIR
+//      .teamContent2
+//        p.commonText
+//          | Wir sind seit 2002 eine Full-Service-Werbeagentur mit Stammsitz in Heimsheim, zwischen Stuttgart und Karlsruhe.
+//          br
+//          |                             Über 60 Jahre Erfahrung vereinen das gesamte VoxelAir-Team. Dabei hat jedes Voxel neben professionellem Allroundwissen auch sein ganz spezielles Gebiet, um selbst die individuellsten Kundenwünsche schnell und kompetent umzusetzen.
+//      .teamContent3
+//

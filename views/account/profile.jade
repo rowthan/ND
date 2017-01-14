@@ -1,0 +1,166 @@
+extends layout
+//block head
+//  link(rel='stylesheet', href='/plugin/profile/css/style.css')
+//  link(rel='stylesheet', href='/plugin/profile/css/bootstrap.min.css')
+
+block content
+  .app-content
+    .app-content-body.fade-in-up
+      // COPY the content from "tpl/"
+      .hbox.hbox-auto-xs.hbox-auto-sm
+        .col
+          //div(style='background:url(/img/c4.jpg) center center; background-size:cover')
+          //  .wrapper-lg.bg-white-opacity
+          //    .row.m-t
+          //      .col-sm-7
+          //        a.thumb-lg.pull-left.m-r(href='')
+          //          img.img-circle(src="#{user.profile.picture}")
+          //        .clear.m-b
+          //          .m-b.m-t-sm
+          //            span.h3.text-black #{user.profile.name}
+          //            small.m-l 地址
+          //          p.m-b
+          //            a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+          //              i.fa.fa-twitter
+          //            a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+          //              i.fa.fa-facebook
+          //            a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+          //              i.fa.fa-google-plus
+          //          a.btn.btn-sm.btn-success.btn-rounded(href='') Follow
+          //      .col-sm-5
+          //        .pull-right.pull-none-xs.text-center
+          //          a.m-b-md.inline.m(href='')
+          //            span.h3.block.font-bold 2k
+          //            small Followers
+          //          a.m-b-md.inline.m(href='')
+          //            span.h3.block.font-bold 250
+          //            small Following
+          .wrapper.bg-white.b-b
+            ul.nav.nav-tabs.nav-sm.ajax
+              li.active
+                a(data-toggle='tab',href='#first') 基本信息
+              li
+                a(data-toggle='tab',href='#second' con-type="myposts" get='no') 头像
+              li
+                a(data-toggle='tab',href='#thrid' get='no' con-type="mycollections") 密码管理
+              li
+                a(data-toggle='tab',href='#forth' get='no' con-type="myposts") 关联账户
+            .padder.tab-content
+              #first.tab-pane.fade.in.active
+                form.form-horizontal(action='/account/profile', method='POST')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  .form-group
+                    label.col-sm-3.control-label(for='name') 用户名
+                    .col-sm-7
+                      input.form-control(type='text', name='profile[name]', id='name', value='#{user.profile.name}')
+                  .form-group
+                    label.col-sm-3.control-label(for='email') Email
+                    .col-sm-7
+                      input.form-control(type='email', name='email', id='email', value='#{user.email}')
+                  .form-group
+                    label.col-sm-3.control-label(for='gender') 性别
+                    .col-sm-4
+                      label.radio.col-sm-4
+                        input(type='radio', checked=user.profile.gender == 'male', name='profile[gender]', value='male', data-toggle='radio')
+                        span 男
+                      label.radio.col-sm-4
+                        input(type='radio', checked=user.profile.gender == 'female', name='profile[gender]', value='female', data-toggle='radio')
+                        span 女
+                  .form-group
+                    label.col-sm-3.control-label(for='location') 地址
+                    .col-sm-7
+                      input.form-control(type='text', name='profile[location]', id='location', value='#{user.profile.location}')
+                  .form-group
+                    label.col-sm-3.control-label(for='website') 网站/微博
+                    .col-sm-7
+                      input.form-control(type='text', name='profile[website]', id='website', value='#{user.profile.website}')
+
+                  .form-group
+                    .col-sm-offset-3.col-sm-4
+                      button.btn.btn.btn-primary(type='submit')
+                        i.fa.fa-pencil
+                        | Update Profile
+              #second.tab-pane.fade
+                form(action='/account/pic', method='POST',enctype="multipart/form-data")
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  .form-group
+                    label.col-sm-3.control-label(for='gravatar') 头像
+                    .col-sm-4
+                        img(src="#{user.profile.picture}",class='profile', width='100', height='100', alt="#{user.email}")
+                      input#uploadPic.form-control(type="file", name="picture", value="#{user.profile.picture}")
+                  .form-group
+                    .col-sm-offset-3.col-sm-4
+                      button.btn.btn.btn-primary(type='submit')
+                        i.fa.fa-pencil
+                        | 更新头像
+                .page-header
+                  h3 Change Password
+              #thrid.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+                form.form-horizontal(action='/account/password', method='POST')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  .form-group
+                    label.col-sm-3.control-label(for='password') 新密码
+                    .col-sm-7
+                      input.form-control(type='password', name='password', id='password')
+                  .form-group
+                    label.col-sm-3.control-label(for='confirmPassword') 确认密码
+                    .col-sm-7
+                      input.form-control(type='password', name='confirmPassword', id='confirmPassword')
+                  .form-group
+                    .col-sm-offset-3.col-sm-4
+                      button.btn.btn-primary(type='submit')
+                        i.fa.fa-lock
+                        | 修改密码
+              #forth.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+                .page-header
+                  h3 账户关联
+                .form-horizontal
+                  .form-group
+                    //.col-sm-offset-3.col-sm-4
+                    //  if user.instagram
+                    //    p: a.text-danger(href='/account/unlink/instagram') Unlink your Instagram account
+                    //  else
+                    //    p: a(href='/auth/instagram') Link your Instagram account
+                    //.col-sm-offset-3.col-sm-4
+                    //  if user.google
+                    //    p: a.text-danger(href='/account/unlink/google') Unlink your Google account
+                    //  else
+                    //    p: a(href='/auth/google') Link your Google account
+                    //.col-sm-offset-3.col-sm-4
+                    //  if user.facebook
+                    //    p: a.text-danger(href='/account/unlink/facebook') Unlink your Facebook account
+                    //  else
+                    //    p: a(href='/auth/facebook') Link your Facebook account
+                    //.col-sm-offset-3.col-sm-4
+                    //  if user.twitter
+                    //    p: a.text-danger(href='/account/unlink/twitter') Unlink your Twitter account
+                    //  else
+                    //    p: a(href='/auth/twitter') Link your Twitter account
+                    .col-sm-offset-3.col-sm-4
+                      if user.github
+                        p: a.text-danger(href='/account/unlink/github') 取消关联github
+                      else
+                        p: a(href='/auth/github') 关联github账户
+                    //.col-sm-offset-3.col-sm-4
+                    //  if user.linkedin
+                    //    p: a.text-danger(href='/account/unlink/linkedin') Unlink your LinkedIn account
+                    //  else
+                    //    p: a(href='/auth/linkedin') Link your LinkedIn account
+        .col.w-lg.bg-light.lter.b-l.bg-auto
+          .wrapper
+            div
+              h4.m-t-xs.m-b-xs 他们关注了你
+
+    //.page-header
+    //  h3 Delete Account
+
+    //form.form-horizontal(action='/account/delete', method='POST')
+    //  .form-group
+    //    p.col-sm-offset-3.col-sm-4 You can delete your account, but keep in mind this action is irreversible.
+    //    input(type='hidden', name='_csrf', value=_csrf)
+    //    .col-sm-offset-3.col-sm-4
+    //      button.btn.btn-danger(type='submit')
+    //        i.fa.fa-trash
+    //        | 删除账户
+
+

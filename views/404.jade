@@ -1,0 +1,18 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/css/404.css', media='all')
+
+block content
+  .menu.main
+    // 顶部导航
+    .error_404
+      .container.clearfix
+        .error_pic
+        .error_info
+          h2
+            p 对不起，您访问的页面不存在！
+          .operate
+            input.global_btn.btn_89bf43(onclick="location.href='/'", type='button', value='返回主页')
+            input.global_btn.btn_39dec8.ml1(onclick='history.go(-1)', type='button', value='返回上一页')
+
+

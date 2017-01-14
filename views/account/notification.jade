@@ -1,0 +1,106 @@
+extends layout
+block content
+  .app-content
+    .app-content-body.fade-in-up
+      .hbox.hbox-auto-xs.hbox-auto-sm
+        .col
+          .wrapper.bg-white.b-b
+            ul.nav.nav-tabs.nav-sm.ajax
+              li.active
+                a(data-toggle='tab',href='#first') 您的帖子评论
+                  span.badge.badge-sm.pull-right-xs
+              li
+                a(data-toggle='tab',href='#second' con-type="myposts" get='no') 回复您的评论
+              //li
+              //  a(data-toggle='tab',href='#thrid' get='no' con-type="mycollections") 评价您的帖子
+              li
+                a(data-toggle='tab',href='#third' get='no' con-type="myposts") 个人空间
+            .padder.tab-content
+              #first.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade.in.active
+                each notifi in commentNotifi
+                  each item in notifi.notification
+                    div.notifi
+                      a.pull-left.thumb-sm.avatar.m-l-n-md(href="/userinfo/#{item.from._id}")
+                        img(src="#{item.from.profile.picture}")
+                      .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+                        .panel-heading.pos-rlt.b-light
+                          span.arrow.arrow-light.left
+                          a(href='/userinfo/#{item.from._id}') #{item.from.profile.name}
+                           | 给你的帖子回复了
+                          a(href='/detail/#{item.post_target}' style="margin-left:5px") 去看看
+                          span.text-muted.m-l-sm.pull-right
+                            | #{moment(item.createAt).format('MM/DD-HH:mm')}
+                            a.delNotifi(href="javascript:;" notifi="#{item._id}") 知道了
+                        .panel-body !{item.message}
+              #second.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade.in
+                each notifi in replyNotifi
+                  each item in notifi.notification
+                    div.notifi
+                      a.pull-left.thumb-sm.avatar.m-l-n-md(href="/userinfo/#{item.from._id}")
+                        img(src="#{item.from.profile.picture}")
+                      .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+                        .panel-heading.pos-rlt.b-light
+                          span.arrow.arrow-light.left
+                          a(href='/userinfo/#{item.from._id}') #{item.from.profile.name}
+                          span 回复您在
+                            a(href="/detail/#{item.post_target}") 帖子
+                          | 里的评论
+                          span.text-muted.m-l-sm.pull-right
+                            | #{moment(item.cerateAt).format('MM/DD-HH:mm')}
+                            a.delNotifi(href="javascript:;" notifi="#{item._id}") 知道了
+                        .panel-body 他回复说：“  #{item.message}
+              #third.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade.in
+                each notifi in messageNotifi
+                  each item in notifi.notification
+                    div.notifi
+                      a.pull-left.thumb-sm.avatar.m-l-n-md(href="/userinfo/#{item.from._id}")
+                        img(src="#{item.from.profile.picture}")
+                      .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+                        .panel-heading.pos-rlt.b-light
+                          span.arrow.arrow-light.left
+                          a(href='/userinfo/#{item.from._id}') #{item.from.profile.name}
+                            | 给你的帖子回复了
+                          a(href='/detail/#{item.post_target}' style="margin-left:5px") 去看看
+                          span.text-muted.m-l-sm.pull-right
+                            | #{moment(item.createAt).format('MM/DD-HH:mm')}
+                            a.delNotifi(href="javascript:;" notifi="#{item._id}") 知道了
+                        .panel-body 他说：“ !{item.message}
+              //#thrid.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+              //  div
+              //    a.pull-left.thumb-sm.avatar.m-l-n-md(href="")
+              //      img(src="}")
+              //    .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+              //      .panel-heading.pos-rlt.b-light
+              //        span.arrow.arrow-light.left
+              //        a(href='')
+              //        span 回复您的评论
+              //        span.text-muted.m-l-sm.pull-right
+              //  div
+              //    a.pull-left.thumb-sm.avatar.m-l-n-md(href="")
+              //      img(src="}")
+              //    .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+              //      .panel-heading.pos-rlt.b-light
+              //        span.arrow.arrow-light.left
+              //        a(href='')
+              //        span 回复您的评论
+              //        span.text-muted.m-l-sm.pull-right
+
+        .col.w-lg.bg-light.lter.b-l.bg-auto
+          .wrapper
+            //div
+            //  h4.m-t-xs.m-b-xs 他们关注了你
+block script
+  script(type='text/javascript').
+    $('.delNotifi').on('click', function () {
+      var target = $(this);
+      var parent = target.parents('.notifi');
+      var notifi = target.attr('notifi');
+      $.ajax({
+        type: 'get',
+        url: '/deleteSingleNotifi?notifiId=' + notifi
+      }).done(function (ret) {
+        if (ret.code == 1) {
+          parent.remove();
+        }
+      })
+    });

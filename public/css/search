@@ -1,0 +1,94 @@
+// Color variables (appears count calculates by raw css)
+@color0: #333333; // Appears 3 times
+@color1: #f8f8f8; // Appears 2 times
+
+
+i {
+  font-style: normal;
+}
+ul {
+  list-style: none;
+}
+ol {
+  list-style: none;
+}
+img {
+  border: 0;
+}
+input {
+  color: @color0;
+  font-size: 12px;
+  outline: none;
+  resize: none;
+}
+button {
+  color: @color0;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  resize: none;
+}
+.cle {
+  zoom: 1;
+  &:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}
+a {
+  -moz-transition: color .2s;
+  -ms-transition: color .2s;
+  -o-transition: color .2s;
+  -webkit-transition: color .2s;
+  color: @color0;
+  text-decoration: none;
+  transition: color .2s;
+  &:hover {
+    color: #ff7d8e;
+    text-decoration: underline;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+#wrapper {
+  margin: 15px auto;
+  max-width: 1200px;
+  min-width: 250px;
+}
+.brand-list {
+  .brand-bd {
+    margin-left: 10px;
+    margin-top: 5px;
+    position: relative;
+  }
+  .item {
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    background-color: @color1;
+    border: 1px solid @color1;
+    left: 40%;
+    padding: 18px;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s;
+    width: 202px;
+    h3 {
+      color: #666666;
+      font-family: arial;
+      font-size: 25px;
+      font-weight: bold;
+      line-height: .8;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 15px;
+    }
+  }
+}

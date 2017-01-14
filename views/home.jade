@@ -1,0 +1,140 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='/css/home.css')
+  link(href='/css/shijuecha.css', rel='stylesheet', type='text/css')
+  //banner 图片滑动
+  link(href='/plugin/imagechange/css/twentytwenty.css', rel='stylesheet', type='text/css')
+  link(href='/plugin/rippler/jquery.ripple.css', rel='stylesheet', type='text/css')
+
+  link(href='/plugin/seedsui/seedsui.min.css', rel='stylesheet', type='text/css')
+
+  //弹幕
+  link(href='/plugin/barrager/barrager.css', rel='stylesheet', type='text/css')
+
+
+
+block content
+  .background.twentytwenty-container(style="position:fixed")
+
+    .htmleaf-container(style="position:fixed;height:100vh;width:100vw;z-index:1")
+
+    img(src="/img/header.png" style="width:100%;height:200px;")
+
+    img(src="/images/test_bck.jpg" style="width:100%;height:200px;z-index:0;")
+
+    h1(style="z-index:2;position:relative;")
+      a(href="") show me
+
+
+  section.col-md-7.col-md-offset-1(style="margin-top:200px;")
+    header.column
+      ul#tabbar.tabbar.animate-slide(data-col=column.length+1)
+        li.tab.active
+          label.tab-label 最新
+        each item in column
+          li.tab
+            label.tab-label #{item.name}
+        hr
+    article(style="margin-top:40px")
+      #slider-container
+        .slider-wrapper
+          #latest.slider-slide
+            ul.list.latest
+              each item in latest
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img( src="#{item.userId.profile.picture}" alt="#{item.userId.profile.name} ")
+                      .userinfo(style="")
+                        a(href="javascript:;")
+                          .fa.fa-close
+                        .back
+                          img(src="#{item.userId.profile.picture}" )
+                          .fullname
+                            b #{item.userId.profile.name}
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid="#{item._id}" type="genius")
+                        i.fa.fa-thumbs-up #{item.genius_count}
+                      button.vote.rippler(postid="#{item._id}" type="crazy")
+                        i.fa.fa-thumbs-down #{item.crazy_count}
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye #{item.pv}
+                        button.rippler
+                          i.fa.fa-comments #{item.comment_count}
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style="margin-top:5px" postid="#{item._id}")
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style="padding-left:5px;height:100%;")
+                    .tag
+                      each tag in item.tags
+                        a(href="/tagsview?tag=#{tag.name}" style="background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px")  !{tag.name}
+                      //i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style="float:right")
+                    a(href="/detail/#{item._id}").posttitle #{item.posttitle}
+                    .row.abstract
+                      if(item.postpic.match(/clouddn.com\/2\.png/gi))
+                        span(postid="#{item._id}" ) !{item.abstract}...
+                        a.more(href="/detail/#{item._id}")
+                          i.fa.fa-long-arrow-right 查看全部
+                      else
+                        .col-md-9
+                          span(postid="#{item._id}") !{item.abstract}...
+                          a.more(href="/detail/#{item._id}")
+                            i.fa.fa-long-arrow-right 查看全部
+                        .col-md-3
+                          img.img-responsive(src="#{item.postpic}")
+                    .postbody
+                  .corner
+                .clear
+              .load.txtcenter
+                a(href='javascript:;') 加载更多
+              img.loading.hidden(src='//images/ajax-loader.gif')
+              .nodata.txtcenter.hidden 已经到底了
+
+
+          each item in column
+            .slider-slide(id="#{item._id}")
+              ul.list
+                li.noclick
+                  .justify
+                    span.peg
+                  .justify-content 最新
+
+
+block script
+  script(src="/js/home.js")
+  script(src="/plugin/imagechange/js/jquery.event.move.js")
+  script(src="/plugin/imagechange/js/jquery.twentytwenty.js")
+  //水纹
+  script(src="/plugin/rippler/jquery.ripple.js")
+  //tab slide
+  script(src="/plugin/seedsui/seedsui.min.js")
+
+  //弹幕
+  script(src="/plugin/barrager/jquery.barrager.js")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

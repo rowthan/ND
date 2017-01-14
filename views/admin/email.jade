@@ -1,0 +1,35 @@
+extends ../account/layout
+block head
+  //link(rel='stylesheet', href='/css/userinfo.min.css', type='text/css', media='screen')
+  link(rel='stylesheet', type='text/css', href='/plugin/editor/css/wysiwyg-editor.css')
+block content
+  .app-content(style="margin-top:50px")
+    .container
+      .row(style="margin:0 auto")
+        .col-md-8(style="background-color:white;")
+          //header
+          //  h2 发布你的想法
+          form(role='form', method='POST')
+            .form-group
+              input(type='hidden',id="_csrf", name='_csrf', value=_csrf)
+            .form-group
+              label(class='col-sm-2 control-label', for='addressee') 收信人
+              input.form-control(type='text', name='addressee',id='addressee')
+            .form-group
+              label(class='col-sm-2 control-label', for='title') 主题
+              input.form-control(type='text', name='title',id='title')
+
+            .form-group
+              textarea#editor(name='content', placeholder='邮件内容...')
+            .form-group
+              .col-sm-offset-2
+                button.btn.btn-primary(type='submit',style="float:right")
+                  i.fa.fa-envelope
+                  | 发送
+        .col-md-4
+          span
+block script
+  script(type='text/javascript', src='/plugin/editor/js/wysiwyg.min.js')
+  script(type='text/javascript', src='/plugin/editor/js/wysiwyg-editor.min.js')
+  script(type='text/javascript', src='/plugin/editor/js/post.js')
+  script(type = 'text/javascript', src = 'http://malsup.github.com/jquery.form.js')

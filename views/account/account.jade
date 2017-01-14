@@ -1,0 +1,1109 @@
+//
+   Created by rowthan on 2016/3/31 0031.
+
+extends layout
+block content
+  .app-content
+    div(ui-butterbar='')
+    a.off-screen-toggle.hide(href='', data-toggle='class:off-screen', data-target='.app-aside')
+    .app-content-body.fade-in-up
+      // COPY the content from "tpl/"
+      .hbox.hbox-auto-xs.hbox-auto-sm
+        .col
+          div(style='background:url(/img/c4.jpg) center center; background-size:cover')
+            .wrapper-lg.bg-white-opacity
+              .row.m-t
+                .col-sm-7
+                  a.thumb-lg.pull-left.m-r(href='')
+                    img.img-circle(src="#{user.profile.picture}")
+                  .clear.m-b
+                    .m-b.m-t-sm
+                      span.h3.text-black #{user.profile.name}
+                      small.m-l 地址 #{user.profile.name}
+                    p.m-b
+                      a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+                        i.fa.fa-twitter
+                      a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+                        i.fa.fa-facebook
+                      a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+                        i.fa.fa-google-plus
+                    //a.btn.btn-sm.btn-success.btn-rounded(href='') Follow
+                //.col-sm-5
+                //  .pull-right.pull-none-xs.text-center
+                //    a.m-b-md.inline.m(href='')
+                //      span.h3.block.font-bold 2k
+                //      small Followers
+                //    a.m-b-md.inline.m(href='')
+                //      span.h3.block.font-bold 250
+                //      small Following
+          .wrapper.bg-white.b-b
+            ul.nav.nav-pills.nav-sm.ajax
+              li.active
+                a(data-toggle='tab',href='#first') 留言板
+              li
+                a(data-toggle='tab',href='#second' con-type="myposts" get='no') 我的文章（公开）
+              li
+                a(data-toggle='tab',href='#thrid' get='no' con-type="mycollections") 我的收藏
+              li
+                a(data-toggle='tab',href='#forth' get='no' con-type="myposts") 个人空间
+          .padder.tab-content
+            #first.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade.in.active
+              each item in messages
+                div
+                  a.pull-left.thumb-sm.avatar.m-l-n-md(href="/userinfo/#{item.from._id}")
+                    img(src="#{item.from.profile.picture}")
+                  .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+                    .panel-heading.pos-rlt.b-light
+                      span.arrow.arrow-light.left
+                      a(href='') #{item.from.profile.name}
+                      span.text-muted.m-l-sm.pull-right
+                        | #{moment(item.cerateAt).format('MM/DD-HH:mm')}
+                    .panel-body
+                      div #{item.message}
+            #second.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+
+            #thrid.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+              //div
+              //  a.pull-left.thumb-sm.avatar.m-l-n-md
+              //    img.img-circle(src='img/a9.jpg', alt='...')
+              //  .m-l-lg
+              //    .m-b-xs
+              //      a.h4(href='') 姓名
+              //      span.text-muted.m-l-sm.pull-right
+              //        | 刚刚
+              //    .m-b
+              //      div
+              //        | 内容
+              //      .m-t-sm
+              //        a.text-muted.m-xs(href='')
+              //          i.icon-action-redo
+              //        a.text-muted.m-xs(href='')
+              //          i.icon-star
+              //        a.text-muted.m-xs(href='')
+              //          i.icon-refresh
+              //          |  13
+              //// .comment-reply
+              //.m-l-lg
+              //  a.pull-left.thumb-sm.avatar
+              //    img(src='img/a5.jpg', alt='用户名')
+              //  .m-l-xxl.panel.b-a
+              //    .panel-heading.pos-rlt
+              //      span.arrow.left.pull-up
+              //      span.text-muted.m-l-sm.pull-right
+              //        | 10m ago
+              //      a(href='') Mika Sam
+              //      |                         Report this comment is helpful
+              // / .comment-reply
+
+              //div
+              //  a.pull-left.thumb-sm.avatar.m-l-n-md
+              //    img.img-circle(src='img/a6.jpg', alt='...')
+              //  .m-l-lg.m-b-lg
+              //    .m-b-xs
+              //      a.h4(href='') 用户
+              //      span.text-muted.m-l-sm.pull-right
+              //        | 3h ago
+              //    .m-b
+              //      .m-b
+              //        | 用户留言内容
+              //      img.b.b-a.wrapper-xs.bg-white.img-responsive(src='img/c5.jpg')
+              //      .m-t-sm
+              //        a.text-muted.m-xs(href='')
+              //          i.icon-action-redo
+              //        a.text-muted.m-xs(href='')
+              //          i.icon-star
+              //        a.text-muted.m-xs(href='')
+              //          i.icon-refresh
+              //          |  1322
+              //div
+              //  a.pull-left.thumb-sm.avatar.m-l-n-md
+              //    img.img-circle(src='img/a4.jpg', alt='...')
+              //  .m-l-lg.m-b-lg
+              //    .m-b-xs
+              //      a.h4(href='') Fisio
+              //      span.text-muted.m-l-sm.pull-right
+              //        | 4h ago
+              //    div
+              //      .m-b
+              //        | Diam nonummy nibh euismod tincidunt ut laoreet. ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin
+              //      .panel.panel-default.m-t-md.m-b-n-sm.pos-rlt
+              //        form
+              //          textarea.form-control.no-border(rows='3', placeholder='Your comment...')
+              //        .panel-footer.bg-light.lter
+              //          button.btn.btn-info.pull-right.btn-sm Comment
+              //          ul.nav.nav-pills.nav-sm
+              //            li
+              //              a(href='')
+              //                i.fa.fa-camera.text-muted
+              //            li
+              //              a(href='')
+              //                i.fa.fa-video-camera.text-muted
+
+            #forth.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+
+
+        .col.w-lg.bg-light.lter.b-l.bg-auto
+          .wrapper
+            //div
+            //  h4.m-t-xs.m-b-xs 他们关注了你
+            //  ul.list-group.no-bg.no-borders.pull-in
+            //    li.list-group-item
+            //      a.pull-left.thumb-sm.avatar.m-r(herf='')
+            //        img.img-circle(src='#{user.profile.picture}', alt='用户名')
+            //        i.on.b-white.bottom
+            //      .clear
+            //        div
+            //          a(href='') Chris Fox
+            //        small.text-muted Designer, Blogger
+            //.panel.b-a
+            //  h4.font-thin.padder 你关注的 有更新
+            //  ul.list-group
+            //    li.list-group-item
+            //      p
+            //        | Wellcome
+            //        a.text-info(href='') @Drew Wllon
+            //        |  and play this web application template, have fun1
+            //      small.block.text-muted
+            //        i.fa.fa-fw.fa-clock-o
+            //        |  2 minuts ago
+            //    li.list-group-item
+            //      p
+            //        | Morbi nec
+            //        a.text-info(href='') @Jonathan George
+            //        |  nunc condimentum ipsum dolor sit amet, consectetur
+            //      small.block.text-muted
+            //        i.fa.fa-fw.fa-clock-o
+            //        |  1 hour ago
+            //    li.list-group-item
+            //      p
+            //        a.text-info(href='') @Josh Long
+            //        |  Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis
+            //      small.block.text-muted
+            //        i.fa.fa-fw.fa-clock-o
+            //        |  2 hours ago
+            //.panel.b-light.clearfix
+            //  .panel-body
+            //    a.thumb.pull-left.m-r(href='')
+            //      img.img-circle(src='img/a0.jpg')
+            //    .clear
+            //      a.text-info(href='')
+            //        | @Mike Mcalidek
+            //        i.fa.fa-twitter
+            //      small.block.text-muted 推荐你关注
+            //      a.btn.btn-xs.btn-success.m-t-xs(href='') Follow
+      // PASTE above
+
+block script
+  script(type='text/javascript').
+    $('.ajax li a').on('click', function () {
+      var ifget = $(this).attr('get');
+      if (ifget == 'no') {
+        $(this).attr("get", 'yes');//修改属性
+        var target = $(this).attr("href");
+        var type = $(this).attr('con-type');
+        var number = 4;
+        $.ajax({
+          type: 'get',
+          url: '/account/ajax_getmine?type=' + type + '&&number=' + number
+        }).done(function (ret) {
+          if (ret.code == 1) {
+            var html = '';
+
+            $.each(ret.data, function (idx, item) {
+              if (type == "mycollections") {
+                html = '<div><a class="pull-left thumb-sm avatar m-l-n-md"><img src="img/a9.jpg" alt="..." class="img-circle"></a>' +
+                        '<div class="m-l-lg"><div class="m-b-xs"><a href="/detail/' + item._id + '" class="h4" target="_blank">' + item.posttitle + '</a>' +
+                        '<span class="text-muted m-l-sm pull-right">刚刚</span></div></div></div>';
+              }
+              else {
+                html = '<div><a class="pull-left thumb-sm avatar m-l-n-md"><img src="img/a2.jpg" alt="..."></a>' +
+                        '<div class="m-l-lg panel b-a"><div class="panel-heading pos-rlt b-b b-light">' +
+                        '<span class="arrow left"></span><a target="_blank" href="/updatepost/'+item._id+'">去修改</a><label class="label bg-light m-l-xs"><a target="_blank" href="/detail/'+item._id+'">查看</a></label>' +
+                        '<span class="text-muted m-l-sm pull-right">' + item.createAt + '</span></div>' +
+                        '<div class="panel-body"><blockquote><p>' + item.abstract + '</p><small> in<cite title="Source Title">标签</cite></small></blockquote>' ;
+                        //'<div>一条牛评.</div></div></div></div>';
+              }
+
+              $(target).append(html);
+            })
+          }
+          else if (ret.code == 0) {
+            alert('没有数据');
+          }
+          else {
+            alert('请求出错');
+          }
+        })
+      }
+      else {
+      }
+    });
+
+//doctype html
+//html(lang='en')
+//  head
+//    meta(charset='utf-8')
+//    title #{title}
+//    meta(name='description', content='个人账户')
+//    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+//    link(rel='stylesheet', href='/plugin/account/bootstrap.css', type='text/css')
+//    link(rel='stylesheet', href='/plugin/account/animate.css', type='text/css')
+//    link(href='//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css', rel='stylesheet')
+//    //link(rel='stylesheet', href='/plugin/account/simple-line-icons.css', type='text/css')
+//    //link(rel='stylesheet', href='/plugin/account/font.css', type='text/css')
+//    link(rel='stylesheet', href='/plugin/account/app.css', type='text/css')
+//  body
+//    #app.app.app-header-fixed
+//      // navbar
+//      .app-header.navbar
+//        // navbar header
+//        .navbar-header.bg-dark
+//          button.pull-right.visible-xs.dk(data-toggle='class:show', data-target='.navbar-collapse')
+//            i.fa.fa-cog
+//          button.pull-right.visible-xs(data-toggle='class:off-screen', data-target='.app-aside', ui-scroll='app')
+//            i.fa.fa-align-justify
+//          // brand
+//          a.navbar-brand.text-lt(href='/')
+//            i.fa.fa-btc
+//            img.hide(src='img/logo.png', alt='.')
+//            span.hidden-folded.m-l-xs naodong
+//          // / brand
+//        // / navbar header
+//        // navbar collapse
+//        .collapse.pos-rlt.navbar-collapse.box-shadow.bg-white-only
+//          // buttons
+//          .nav.navbar-nav.hidden-xs
+//            a.btn.no-shadow.navbar-btn(href='#', data-toggle='class:app-aside-folded', data-target='.app')
+//              i.fa.fa-dedent.fa-fw.text
+//              i.fa.fa-indent.fa-fw.text-active
+//            a.btn.no-shadow.navbar-btn(href='', data-toggle='class:show', data-target='#aside-user')
+//              i.icon-user.fa-fw
+//          // / buttons
+//          // link and dropdown
+//          ul.nav.navbar-nav.hidden-sm
+//            li.dropdown.pos-stc
+//              a.dropdown-toggle(href='#', data-toggle='dropdown')
+//                span 菜单
+//                span.caret
+//              .dropdown-menu.wrapper.w-full.bg-white
+//                .row
+//                  .col-sm-4
+//                    .m-l-xs.m-t-xs.m-b-xs.font-bold
+//                      | Pages
+//                      span.badge.badge-sm.bg-success 10
+//                    .row
+//                      .col-xs-6
+//                        ul.list-unstyled.l-h-2x
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Profile
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Post
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | 搜索
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Invoice
+//                      .col-xs-6
+//                        ul.list-unstyled.l-h-2x
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Price
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Lock screen
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Sign in
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Sign up
+//                  .col-sm-4.b-l.b-light
+//                    .m-l-xs.m-t-xs.m-b-xs.font-bold
+//                      | UI Kits
+//                      span.label.label-sm.bg-primary 12
+//                    .row
+//                      .col-xs-6
+//                        ul.list-unstyled.l-h-2x
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Buttons
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Icons
+//                              span.badge.badge-sm.bg-warning 1000+
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Grid
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Widgets
+//                      .col-xs-6
+//                        ul.list-unstyled.l-h-2x
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Bootstap
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Sortable
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Portlet
+//                          li
+//                            a(href='')
+//                              i.fa.fa-fw.fa-angle-right.text-muted.m-r-xs
+//                              | Timeline
+//                  .col-sm-4.b-l.b-light
+//                    .m-l-xs.m-t-xs.m-b-sm.font-bold Analysis
+//                    .text-center
+//                      .inline
+//                        div(ui-jq='easyPieChart', ui-options="{\
+//                        percent: 65,\
+//                        lineWidth: 50,\
+//                        trackColor: '{{app.color.light}}',\
+//                        barColor: '{{app.color.info}}',\
+//                        scaleColor: false,\
+//                        size: 100,\
+//                        rotate: 90,\
+//                        lineCap: 'butt',\
+//                        animate: 2000\
+//                        }")
+//            li.dropdown
+//              a.dropdown-toggle(href='#', data-toggle='dropdown')
+//                i.fa.fa-fw.fa-plus.visible-xs-inline-block
+//                span(translate='header.navbar.new.NEW') 发布
+//                span.caret
+//              ul.dropdown-menu(role='menu')
+//                li
+//                  a(href='#', translate='header.navbar.new.PROJECT') 文章
+//                li
+//                  a(href='')
+//                    span.badge.bg-info.pull-right 5
+//                    span(translate='header.navbar.new.TASK') 心情
+//                li
+//                  a(href='', translate='header.navbar.new.USER') 个人笔记
+//                li.divider
+//                li
+//                  a(href='')
+//                    span.badge.bg-danger.pull-right 4
+//                    span(translate='header.navbar.new.EMAIL') Email
+//          // / link and dropdown
+//          // search form
+//          form.navbar-form.navbar-form-sm.navbar-left.shift(ui-shift='prependTo', data-target='.navbar-collapse', role='search', ng-controller='TypeaheadDemoCtrl')
+//            .form-group
+//              .input-group
+//                input.form-control.input-sm.bg-light.no-border.rounded.padder(type='text', ng-model='selected', typeahead='state for state in states | filter:$viewValue | limitTo:8', placeholder='Search projects...')
+//                span.input-group-btn
+//                  button.btn.btn-sm.bg-light.rounded(type='submit')
+//                    i.fa.fa-search
+//          // / search form
+//          // nabar right
+//          ul.nav.navbar-nav.navbar-right
+//            li.dropdown
+//              a.dropdown-toggle(href='#', data-toggle='dropdown')
+//                i.fa.fa-bell.fa-fw
+//                span.visible-xs-inline 提醒
+//                if notifis.length
+//                  span.badge.badge-sm.up.bg-danger.pull-right-xs #{notifis.length}
+//              // dropdown
+//              .dropdown-menu.w-xl.animated.fadeInUp
+//                .panel.bg-white
+//                  .panel-heading.b-light.bg-light
+//                    if notifis
+//                      strong
+//                        | 你有
+//                        span #{notifis.length}
+//                        |  提醒未看
+//                        a(href="/deleteNotifi?userid="+user._id style="float:right") 清楚所有
+//                  .list-group
+//                    each item in notifis
+//                      if(item.post_target)
+//                        a.media.list-group-item.delete(href='/detail/#{item.post_target}?notifiId=#{item._id}')
+//                          span.pull-left.thumb-sm
+//                            img.img-circle(src='img/a0.jpg', alt='...')
+//                          span.media-body.block.m-b-none
+//                            | 您的帖子有新回复
+//                            br
+//                            small.text-muted 时间 #{moment(item.createAt).format('MM/DD-hh:mm')}
+//                      if(item.comment_target.postid)
+//                        a.media.list-group-item(href='/detail/#{item.comment_target.postid}?notifiId=#{item._id}')
+//                          span.media-body.block.m-b-none
+//                            | 有人回话给你
+//                            br
+//                            small.text-muted #{moment(item.createAt).format('MM/DD-hh:mm')}
+//                  .panel-footer.text-sm
+//                    a.pull-right(href='')
+//                      i.fa.fa-cog
+//                    a(href='#notes', data-toggle='class:show animated fadeInRight') 查看
+//              // / dropdown
+//            li.dropdown
+//              a.dropdown-toggle.clear(href='#', data-toggle='dropdown')
+//                span.thumb-sm.avatar.pull-right.m-t-n-sm.m-b-n-sm.m-l-sm
+//                  img(src='img/a0.jpg', alt='...')
+//                  i.on.md.b-white.bottom
+//                span.hidden-sm.hidden-md #{user.profile.name}
+//                b.caret
+//              // dropdown
+//              ul.dropdown-menu.animated.fadeInRight.w
+//                li.wrapper.b-b.m-b-sm.bg-light.m-t-n-xs
+//                  div
+//                    p 空间使用情况
+//                  progressbar.progress-xs.m-b-none.bg-white(value='60')
+//                li
+//                  a(href='')
+//                    span.badge.bg-danger.pull-right 30%
+//                    span 设置
+//                li
+//                  a(ui-sref='app.page.profile') Profile
+//                li
+//                  a(ui-sref='app.docs')
+//                    span.label.bg-info.pull-right new
+//                    |                   帮助
+//                li.divider
+//                li
+//                  a(ui-sref='access.signin') 注销
+//              // / dropdown
+//          // / navbar right
+//        // / navbar collapse
+//      // / navbar
+//      // menu
+//      .app-aside.hidden-xs.bg-dark
+//        .aside-wrap
+//          .navi-wrap
+//            // user
+//            #aside-user.clearfix.hidden-xs.text-center.hide
+//              .dropdown.wrapper
+//                a(ui-sref='app.page.profile')
+//                  span.thumb-lg.w-auto-folded.avatar.m-t-sm
+//                    img.img-full(src='img/a0.jpg', alt='...')
+//                a.dropdown-toggle.hidden-folded(href='#', data-toggle='dropdown')
+//                  span.clear
+//                    span.block.m-t-sm
+//                      strong.font-bold.text-lt #{user.profile.name}
+//                      b.caret
+//                    span.text-muted.text-xs.block Art Director
+//                // dropdown
+//                ul.dropdown-menu.animated.fadeInRight.w.hidden-folded
+//                  li.wrapper.b-b.m-b-sm.bg-info.m-t-n-xs
+//                    span.arrow.top.hidden-folded.arrow-info
+//                    div
+//                      p 300mb of 500mb used
+//                    progressbar.progress-xs.m-b-none.dker(value='60', type='white')
+//                  li
+//                    a(href='') 设置
+//                  li
+//                    a(ui-sref='app.page.profile') Profile
+//                  li
+//                    a(href='')
+//                      span.badge.bg-danger.pull-right 3
+//                      |                     提醒
+//                  li.divider
+//                  li
+//                    a(ui-sref='access.signin') 注销
+//                // / dropdown
+//              .line.dk.hidden-folded
+//            // / user
+//            // nav
+//            nav.navi(ui-nav='')
+//              ul.nav
+//                //li.hidden-folded.padder.m-t.m-b-sm.text-muted.text-xs
+//                //  span(translate='aside.nav.HEADER') 导航栏
+//                //li
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    i.fa.fa-stats.icon.text-primary-dker
+//                //    span.font-bold(translate='aside.nav.DASHBOARD') Dashboard
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span(translate='aside.nav.DASHBOARD') 操作台
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.dashboard-v1')
+//                //        span Dashboard v1
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.dashboard-v2')
+//                //        b.label.bg-info.pull-right N
+//                //        span Dashboard v2
+//                li(ui-sref-active='active')
+//                  a(ui-sref='app.calendar')
+//                    i.fa.fa-calendar.icon.text-info-dker
+//                    span.font-bold(translate='aside.nav.CALENDAR') 日历
+//                li(ui-sref-active='active')
+//                  a(ui-sref='app.mail.list')
+//                    b.badge.bg-info.pull-right 9
+//                    i.fa.fa-envelope.icon.text-info-lter
+//                    span.font-bold(translate='aside.nav.EMAIL') Email
+//                //li
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    i.fa.fa-th-large.icon.text-success
+//                //    span.font-bold Apps
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span Apps
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='apps.note')
+//                //        span Note
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='apps.contact')
+//                //        span Contacts
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.weather')
+//                //        span Weather
+//                //li.line.dk
+//                //li.hidden-folded.padder.m-t.m-b-sm.text-muted.text-xs
+//                //  span(translate='aside.nav.components.COMPONENTS') Components
+//                //li
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    b.badge.bg-info.pull-right 3
+//                //    i.fa.fa-th
+//                //    span Layout
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span Layout
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='layout.app')
+//                //        span Application
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='layout.fullwidth')
+//                //        span Full width
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='layout.mobile')
+//                //        span Mobile
+//                //li(ng-class="{active:$state.includes('app.ui')}")
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    i.fa.fa-briefcase.icon
+//                //    span(translate='aside.nav.components.ui_kits.UI_KITS') UI Kits
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span(translate='aside.nav.components.ui_kits.UI_KITS') UI Kits
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.buttons')
+//                //        span(translate='aside.nav.components.ui_kits.BUTTONS') Buttons
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.icons')
+//                //        b.badge.bg-info.pull-right 3
+//                //        span(translate='aside.nav.components.ui_kits.ICONS') Icons
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.grid')
+//                //        span(translate='aside.nav.components.ui_kits.GRID') Grid
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.widgets')
+//                //        b.badge.bg-success.pull-right 13
+//                //        span(translate='aside.nav.WIDGETS') Widgets
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.bootstrap')
+//                //        b.badge.bg-primary.pull-right 16
+//                //        span(translate='aside.nav.components.ui_kits.BOOTSTRAP') Bootstrap
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.sortable')
+//                //        span(translate='aside.nav.components.ui_kits.SORTABLE') Sortable
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.portlet')
+//                //        span(translate='aside.nav.components.ui_kits.PORTLET') Portlet
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.timeline')
+//                //        span(translate='aside.nav.components.ui_kits.TIMELINE') Timeline
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.tree')
+//                //        span Tree
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.toaster')
+//                //        span Toaster
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.jvectormap')
+//                //        span(translate='aside.nav.components.ui_kits.VECTOR_MAP') Vector Map
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.ui.googlemap')
+//                //        span Google Map
+//                //li(ng-class="{active:$state.includes('app.table')}")
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    b.label.bg-primary.pull-right 2
+//                //    i.fa.fa-list
+//                //    span(translate='aside.nav.components.table.TABLE') Table
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span(translate='aside.nav.components.table.TABLE') Table
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.table.static')
+//                //        span(translate='aside.nav.components.table.TABLE_STATIC') Table static
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.table.datatable')
+//                //        span(translate='aside.nav.components.table.DATATABLE') Datatable
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.table.footable')
+//                //        span(translate='aside.nav.components.table.FOOTABLE') Footable
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.table.grid')
+//                //        span ngGrid
+//                //li(ng-class="{active:$state.includes('app.form')}")
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    i.fa.fa-edit
+//                //    span(translate='aside.nav.components.form.FORM') Form
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span(translate='aside.nav.components.form.FORM') Form
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.form.elements')
+//                //        span(translate='aside.nav.components.form.FORM_ELEMENTS') Form elements
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.form.validation')
+//                //        span(translate='aside.nav.components.form.FORM_VALIDATION') Form validation
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.form.wizard')
+//                //        span(translate='aside.nav.components.form.FORM_WIZARD') Form wizard
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.form.fileupload')
+//                //        span File upload
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.form.imagecrop')
+//                //        span Image crop
+//                //li(ui-sref-active='active')
+//                //  a(ui-sref='app.chart')
+//                //    i.fa.fa-signal
+//                //    span(translate='aside.nav.components.CHART') Chart
+//                //li(ng-class="{active:$state.includes('app.page')}")
+//                //  a.auto(href='')
+//                //    span.pull-right.text-muted
+//                //      i.fa.fa-fw.fa-angle-right.text
+//                //      i.fa.fa-fw.fa-angle-down.text-active
+//                //    i.fa.fa-file.icon
+//                //    span(translate='aside.nav.components.pages.PAGES') Pages
+//                //  ul.nav.nav-sub.dk
+//                //    li.nav-sub-header
+//                //      a(href='')
+//                //        span(translate='aside.nav.components.pages.PAGES') Pages
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.page.profile')
+//                //        span(translate='aside.nav.components.pages.PROFILE') Profile
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.page.post')
+//                //        span(translate='aside.nav.components.pages.POST') Post
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.page.search')
+//                //        span(translate='aside.nav.components.pages.SEARCH') Search
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.page.invoice')
+//                //        span(translate='aside.nav.components.pages.INVOICE') Invoice
+//                //    li(ui-sref-active='active')
+//                //      a(ui-sref='app.page.price')
+//                //        span Price
+//                //    li
+//                //      a(ui-sref='lockme')
+//                //        span(translate='aside.nav.components.pages.LOCK_SCREEN') Lock screen
+//                //    li
+//                //      a(ui-sref='access.signin')
+//                //        span(translate='aside.nav.components.pages.SIGNIN') Signin
+//                //    li
+//                //      a(ui-sref='access.signup')
+//                //        span(translate='aside.nav.components.pages.SIGNUP') Signup
+//                //    li
+//                //      a(ui-sref='access.forgotpwd')
+//                //        span(translate='aside.nav.components.pages.FORGOT_PASSWORD') Forgot password
+//                //    li
+//                //      a(ui-sref='access.404')
+//                //        span(translate='aside.nav.components.pages.404') 404
+//                //li.line.dk.hidden-folded
+//                //li.hidden-folded.padder.m-t.m-b-sm.text-muted.text-xs
+//                //  span(translate='aside.nav.your_stuff.YOUR_STUFF') Your Stuff
+//                //li
+//                //  a(ui-sref='app.page.profile')
+//                //    i.icon-user.icon.text-success-lter
+//                //    b.badge.bg-success.pull-right 30%
+//                //    span(translate='aside.nav.your_stuff.PROFILE') Profile
+//                //li
+//                //  a(ui-sref='app.docs')
+//                //    i.icon-question.icon
+//                //    span(translate='aside.nav.your_stuff.DOCUMENTS') Documents
+//            // nav
+//            // aside footer
+//            //.wrapper.m-t
+//            //  .text-center-folded
+//            //    span.pull-right.pull-none-folded 60%
+//            //    span.hidden-folded(translate='aside.MILESTONE') Milestone
+//            //  .progress.progress-xxs.m-t-sm.dk
+//            //    .progress-bar.progress-bar-info(style='width: 60%;')
+//            //  .text-center-folded
+//            //    span.pull-right.pull-none-folded 35%
+//            //    span.hidden-folded(translate='aside.RELEASE') Release
+//            //  .progress.progress-xxs.m-t-sm.dk
+//            //    .progress-bar.progress-bar-primary(style='width: 35%;')
+//            // / aside footer
+//      // / menu
+//      // content
+//      .app-content
+//        div(ui-butterbar='')
+//        a.off-screen-toggle.hide(href='', data-toggle='class:off-screen', data-target='.app-aside')
+//        .app-content-body.fade-in-up
+//          // COPY the content from "tpl/"
+//          .hbox.hbox-auto-xs.hbox-auto-sm
+//            .col
+//              div(style='background:url(/img/c4.jpg) center center; background-size:cover')
+//                .wrapper-lg.bg-white-opacity
+//                  .row.m-t
+//                    .col-sm-7
+//                      a.thumb-lg.pull-left.m-r(href='')
+//                        if user.profile.picture.indexOf('https:') > -1
+//                          img.img-circle(src="#{user.profile.picture}", alt="#{user.email}")
+//                        else
+//                          img.img-circle(src="/upload/#{user.profile.picture}")
+//                      .clear.m-b
+//                        .m-b.m-t-sm
+//                          span.h3.text-black #{user.profile.name}
+//                          small.m-l 地址
+//                        p.m-b
+//                          a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+//                            i.fa.fa-twitter
+//                          a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+//                            i.fa.fa-facebook
+//                          a.btn.btn-sm.btn-bg.btn-rounded.btn-default.btn-icon(href='')
+//                            i.fa.fa-google-plus
+//                        a.btn.btn-sm.btn-success.btn-rounded(href='') Follow
+//                    .col-sm-5
+//                      .pull-right.pull-none-xs.text-center
+//                        a.m-b-md.inline.m(href='')
+//                          span.h3.block.font-bold 2k
+//                          small Followers
+//                        a.m-b-md.inline.m(href='')
+//                          span.h3.block.font-bold 250
+//                          small Following
+//              .wrapper.bg-white.b-b
+//                ul.nav.nav-pills.nav-sm.ajax
+//                  li.active
+//                    a(data-toggle='tab',href='#first') 留言板
+//                  li
+//                    a(data-toggle='tab',href='#second' con-type="myposts" get='no') 我的文章（公开）
+//                  li
+//                    a(data-toggle='tab',href='#thrid' get='no' con-type="mycollections") 我的收藏
+//                  li
+//                    a(data-toggle='tab',href='#forth' get='no' con-type="myposts") 个人空间
+//              .padder.tab-content
+//                #first.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade.in.active
+//                  each item in messages
+//                    div
+//                      a.pull-left.thumb-sm.avatar.m-l-n-md(href="/userinfo/#{item.from._id}")
+//                        if item.from.profile.picture.indexOf('https:') > -1
+//                          img(src="#{item.from.profile.picture}", alt="#{item.from.profile.name}")
+//                        else
+//                          img(src="/upload/#{item.from.profile.picture}")
+//                      .m-l-lg.m-b-lg.panel.b-a.bg-light.lt
+//                        .panel-heading.pos-rlt.b-light
+//                          span.arrow.arrow-light.left
+//                          a(href='') #{item.from.profile.name}
+//                          span.text-muted.m-l-sm.pull-right
+//                            | #{moment(item.cerateAt).format('MM/DD-HH:mm')}
+//                        .panel-body
+//                          div #{item.message}
+//                #second.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+//
+//                #thrid.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+//                  //div
+//                  //  a.pull-left.thumb-sm.avatar.m-l-n-md
+//                  //    img.img-circle(src='img/a9.jpg', alt='...')
+//                  //  .m-l-lg
+//                  //    .m-b-xs
+//                  //      a.h4(href='') 姓名
+//                  //      span.text-muted.m-l-sm.pull-right
+//                  //        | 刚刚
+//                  //    .m-b
+//                  //      div
+//                  //        | 内容
+//                  //      .m-t-sm
+//                  //        a.text-muted.m-xs(href='')
+//                  //          i.icon-action-redo
+//                  //        a.text-muted.m-xs(href='')
+//                  //          i.icon-star
+//                  //        a.text-muted.m-xs(href='')
+//                  //          i.icon-refresh
+//                  //          |  13
+//                  //// .comment-reply
+//                  //.m-l-lg
+//                  //  a.pull-left.thumb-sm.avatar
+//                  //    img(src='img/a5.jpg', alt='用户名')
+//                  //  .m-l-xxl.panel.b-a
+//                  //    .panel-heading.pos-rlt
+//                  //      span.arrow.left.pull-up
+//                  //      span.text-muted.m-l-sm.pull-right
+//                  //        | 10m ago
+//                  //      a(href='') Mika Sam
+//                  //      |                         Report this comment is helpful
+//                  // / .comment-reply
+//
+//                  //div
+//                  //  a.pull-left.thumb-sm.avatar.m-l-n-md
+//                  //    img.img-circle(src='img/a6.jpg', alt='...')
+//                  //  .m-l-lg.m-b-lg
+//                  //    .m-b-xs
+//                  //      a.h4(href='') 用户
+//                  //      span.text-muted.m-l-sm.pull-right
+//                  //        | 3h ago
+//                  //    .m-b
+//                  //      .m-b
+//                  //        | 用户留言内容
+//                  //      img.b.b-a.wrapper-xs.bg-white.img-responsive(src='img/c5.jpg')
+//                  //      .m-t-sm
+//                  //        a.text-muted.m-xs(href='')
+//                  //          i.icon-action-redo
+//                  //        a.text-muted.m-xs(href='')
+//                  //          i.icon-star
+//                  //        a.text-muted.m-xs(href='')
+//                  //          i.icon-refresh
+//                  //          |  1322
+//                  //div
+//                  //  a.pull-left.thumb-sm.avatar.m-l-n-md
+//                  //    img.img-circle(src='img/a4.jpg', alt='...')
+//                  //  .m-l-lg.m-b-lg
+//                  //    .m-b-xs
+//                  //      a.h4(href='') Fisio
+//                  //      span.text-muted.m-l-sm.pull-right
+//                  //        | 4h ago
+//                  //    div
+//                  //      .m-b
+//                  //        | Diam nonummy nibh euismod tincidunt ut laoreet. ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin
+//                  //      .panel.panel-default.m-t-md.m-b-n-sm.pos-rlt
+//                  //        form
+//                  //          textarea.form-control.no-border(rows='3', placeholder='Your comment...')
+//                  //        .panel-footer.bg-light.lter
+//                  //          button.btn.btn-info.pull-right.btn-sm Comment
+//                  //          ul.nav.nav-pills.nav-sm
+//                  //            li
+//                  //              a(href='')
+//                  //                i.fa.fa-camera.text-muted
+//                  //            li
+//                  //              a(href='')
+//                  //                i.fa.fa-video-camera.text-muted
+//
+//                #forth.streamline.b-l.b-info.m-l-lg.m-b.padder-v.tab-pane.fade
+//
+//
+//            .col.w-lg.bg-light.lter.b-l.bg-auto
+//              .wrapper
+//                div
+//                  h4.m-t-xs.m-b-xs 他们关注了你
+//                  ul.list-group.no-bg.no-borders.pull-in
+//                    li.list-group-item
+//                      a.pull-left.thumb-sm.avatar.m-r(herf='')
+//                        img.img-circle(src='img/a4.jpg', alt='...')
+//                        i.on.b-white.bottom
+//                      .clear
+//                        div
+//                          a(href='') Chris Fox
+//                        small.text-muted Designer, Blogger
+//                .panel.b-a
+//                  h4.font-thin.padder 你关注的 有更新
+//                  ul.list-group
+//                    li.list-group-item
+//                      p
+//                        | Wellcome
+//                        a.text-info(href='') @Drew Wllon
+//                        |  and play this web application template, have fun1
+//                      small.block.text-muted
+//                        i.fa.fa-fw.fa-clock-o
+//                        |  2 minuts ago
+//                    li.list-group-item
+//                      p
+//                        | Morbi nec
+//                        a.text-info(href='') @Jonathan George
+//                        |  nunc condimentum ipsum dolor sit amet, consectetur
+//                      small.block.text-muted
+//                        i.fa.fa-fw.fa-clock-o
+//                        |  1 hour ago
+//                    li.list-group-item
+//                      p
+//                        a.text-info(href='') @Josh Long
+//                        |  Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis
+//                      small.block.text-muted
+//                        i.fa.fa-fw.fa-clock-o
+//                        |  2 hours ago
+//                .panel.b-light.clearfix
+//                  .panel-body
+//                    a.thumb.pull-left.m-r(href='')
+//                      img.img-circle(src='img/a0.jpg')
+//                    .clear
+//                      a.text-info(href='')
+//                        | @Mike Mcalidek
+//                        i.fa.fa-twitter
+//                      small.block.text-muted 推荐你关注
+//                      a.btn.btn-xs.btn-success.m-t-xs(href='') Follow
+//          // PASTE above
+//      // /content
+//      // aside right
+//      .app-aside-right.pos-fix.no-padder.w-md.w-auto-xs.bg-white.b-l.animated.fadeInRight.hide
+//        .vbox
+//          .wrapper.b-b.b-t.b-light.m-b
+//            a.pull-right.text-muted.text-md(href='', data-toggle='class:show', data-target='.app-aside-right')
+//              i.icon-close
+//            |           Chat
+//          .row-row
+//            .cell
+//              .cell-inner.padder
+//                // chat list
+//                .m-b
+//                  a.pull-left.thumb-xs.avatar(href='')
+//                    img(src='img/a2.jpg', alt='...')
+//                  .clear
+//                    .pos-rlt.wrapper-sm.b.b-light.r.m-l-sm
+//                      span.arrow.left.pull-up
+//                      p.m-b-none Hi John, What's up...
+//                    small.text-muted.m-l-sm
+//                      i.fa.fa-ok.text-success
+//                      |  2 minutes ago
+//                .m-b
+//                  a.pull-right.thumb-xs.avatar(href='')
+//                    img.img-circle(src='img/a3.jpg', alt='...')
+//                  .clear
+//                    .pos-rlt.wrapper-sm.bg-light.r.m-r-sm
+//                      span.arrow.right.pull-up.arrow-light
+//                      p.m-b-none Lorem ipsum dolor :)
+//                    small.text-muted 1 minutes ago
+//                .m-b
+//                  a.pull-left.thumb-xs.avatar(href='')
+//                    img(src='img/a2.jpg', alt='...')
+//                  .clear
+//                    .pos-rlt.wrapper-sm.b.b-light.r.m-l-sm
+//                      span.arrow.left.pull-up
+//                      p.m-b-none Great!
+//                    small.text-muted.m-l-sm
+//                      i.fa.fa-ok.text-success
+//                      | Just Now
+//                // / chat list
+//          .wrapper.m-t.b-t.b-light
+//            form.m-b-none
+//              .input-group
+//                input.form-control(type='text', placeholder='Say something')
+//                span.input-group-btn
+//                  button.btn.btn-default(type='button') SEND
+//      // / aside right
+//    // jQuery
+//
+//    script(src='http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js')
+//    script(src='/plugin/bootstrap/js/bootstrap.min.js')
+//    script(type='text/javascript').
+//      $('.ajax li a').on('click', function () {
+//        var ifget = $(this).attr('get');
+//        if (ifget == 'no') {
+//          $(this).attr("get", 'yes');//修改属性
+//          var target = $(this).attr("href");
+//          var type = $(this).attr('con-type');
+//          var number = 4;
+//          $.ajax({
+//            type: 'get',
+//            url: '/account/ajax_getmine?type=' + type + '&&number=' + number
+//          }).done(function (ret) {
+//            if (ret.code == 1) {
+//              var html = '';
+//
+//              $.each(ret.data, function (idx, item) {
+//                if(type=="mycollections"){
+//                  html='<div><a class="pull-left thumb-sm avatar m-l-n-md"><img src="img/a9.jpg" alt="..." class="img-circle"></a>' +
+//                          '<div class="m-l-lg"><div class="m-b-xs"><a href="/detail/'+item._id+'" class="h4" target="_blank">'+item.posttitle+'</a>' +
+//                          '<span class="text-muted m-l-sm pull-right">刚刚</span></div></div></div>';
+//                }
+//                else{
+//                  html = '<div><a class="pull-left thumb-sm avatar m-l-n-md"><img src="img/a2.jpg" alt="..."></a>' +
+//                          '<div class="m-l-lg panel b-a"><div class="panel-heading pos-rlt b-b b-light">' +
+//                          '<span class="arrow left"></span><a href="">Peter</a><label class="label bg-light m-l-xs">VIP</label>' +
+//                          '<span class="text-muted m-l-sm pull-right">' + item.createAt + '</span></div>' +
+//                          '<div class="panel-body"><blockquote><p>' + item.postbody + '</p><small> in<cite title="Source Title">标签</cite></small></blockquote>' +
+//                          '<div>一条牛评.</div></div></div></div>';
+//                }
+//
+//                $(target).append(html);
+//              })
+//            }
+//            else if (ret.code == 0) {
+//              alert('没有数据');
+//            }
+//            else {
+//              alert('请求出错');
+//            }
+//          })
+//        }
+//        else {
+//        }
+//      });
+//
+//
+//      +function ($) {
+//        $(function(){
+//          // class
+//          $(document).on('click', '[data-toggle^="class"]', function(e){
+//            e && e.preventDefault();
+//            console.log('abc');
+//            var $this = $(e.target), $class , $target, $tmp, $classes, $targets;
+//            !$this.data('toggle') && ($this = $this.closest('[data-toggle^="class"]'));
+//            $class = $this.data()['toggle'];
+//            $target = $this.data('target') || $this.attr('href');
+//            $class && ($tmp = $class.split(':')[1]) && ($classes = $tmp.split(','));
+//            $target && ($targets = $target.split(','));
+//            $classes && $classes.length && $.each($targets, function( index, value ) {
+//              if ( $classes[index].indexOf( '*' ) !== -1 ) {
+//                var patt = new RegExp( '\\\s' +
+//                        $classes[index].
+//                        replace( /\\*/g, '[A-Za-z0-9-_]+' ).
+//                        split( ' ' ).
+//                        join( '\\\s|\\s' ) +
+//                        '\\\s', 'g' );
+//                $($this).each( function ( i, it ) {
+//                  var cn = ' ' + it.className + ' ';
+//                  while ( patt.test( cn ) ) {
+//                    cn = cn.replace( patt, ' ' );
+//                  }
+//                  it.className = $.trim( cn );
+//                });
+//              }
+//              ($targets[index] !='#') && $($targets[index]).toggleClass($classes[index]) || $this.toggleClass($classes[index]);
+//            });
+//            $this.toggleClass('active');
+//          });
+//          // collapse nav
+//          $(document).on('click', 'nav a', function (e) {
+//            var $this = $(e.target), $active;
+//            $this.is('a') || ($this = $this.closest('a'));
+//            $active = $this.parent().siblings( ".active" );
+//            $active && $active.toggleClass('active').find('> ul:visible').slideUp(200);
+//            ($this.parent().hasClass('active') && $this.next().slideUp(200)) || $this.next().slideDown(200);
+//            $this.parent().toggleClass('active');
+//            $this.next().is('ul') && e.preventDefault();
+//            setTimeout(function(){ $(document).trigger('updateNav'); }, 300);
+//          });
+//        });
+//      }(jQuery);

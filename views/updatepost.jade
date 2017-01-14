@@ -1,0 +1,192 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/css/userinfo.min.css', type='text/css', media='screen')
+  link(rel='stylesheet', href='/css/detail.min.css')
+  link(rel='stylesheet', type='text/css', href='/plugin/editor/css/wysiwyg-editor.css')
+  //link(href='/plugin/editor/css/demo.css', rel='stylesheet', type='text/css')
+  style(type='text/css').
+     .word {
+        color: red;
+        padding: 0 4px;
+     }
+
+
+block content
+  .container-fluid.main(style="background-color:pink;max-width: 800px; margin:0 auto; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.1); position: relative;")
+    .content.row(style="background-color:;padding:0px;margin-top:60px")
+      .cont-left.col-xs-12
+        .postbody(style="padding: 2% 3% 0;")
+          #postid(style="display:none") #{post._id}
+          h1
+            span#title(style="border:1px dotted #D3D3D3;" onclick='_edit.IN("title","/updatepost?postid=#{post._id}&&type=title")' ) !{post.posttitle}
+            button.edit(style="border:0;background:none;color:red" onclick='_edit.IN("title","/updatepost?postid=#{post._id}&&type=title")')
+              i.fa.fa-edit
+          .info
+            i 时间：
+            span  #{moment(post.createAt).format('MM/DD/YYYY-HH:mm')}
+            i 作者：
+            span
+              a(href='/userinfo/#{post.userId._id}') #{post.userId.profile.name}
+            i 标签：
+            span
+              each item in post.tags
+                span
+                  a(href='/tagsview/?tag=#{item.name}')
+                    | #{item.name}
+            i 浏览量：
+            span(style='font-family:Georgia;font-size:15px;') #{post.pv}
+            a.collect(href="javascript:")
+              i.fa.fa-star-o 收藏
+          .contents
+            .row
+              .col-md-6
+                | 摘要内容：
+                #abstract.wordCount.abstract(style="border:1px dotted #D3D3D3;border-radius:3px;padding:5px")
+                  !{post.abstract}
+                span.wordwrap
+                  var.word 100
+                  | /100
+                button.editabstract(style="border:0;background:none;color:red" onclick='_edit.IN("abstract","/updatepost?postid=#{post._id}&&type=abstract"),limitInput()')
+                  i.fa.fa-edit
+              .col-md-6 封面
+                img(src="#{post.postpic}" style="border-radius:5px;")
+            #postbody
+              | !{post.postbody}
+              .clear
+            .clear
+            button.edit(style="border:0;background:none;color:red" onclick='_edit.ADD("#postbody")')
+              i.fa.fa-edit
+            button.save(style="display:none;border:0;background:none;color:green;float:right" onclick='_edit.SAVE("#postbody","/updatepost?postid=#{post._id}&&type=postbody")' )
+              i.fa.fa-save
+
+      //.cont-right.col-md-3 图片区域 var edit = target.siblings(".edit");
+      //  |       var save = target.siblings(".save");
+      //  |       edit.toggleClass("hidden");
+      //  |       save.toggleClass("hidden");
+block script
+  script(type = 'text/javascript', src = '/plugin/editor/js/wysiwyg.min.js')
+  script(type = 'text/javascript', src = '/plugin/editor/js/wysiwyg-editor.min.js')
+  script(type = 'text/javascript', src = 'http://malsup.github.com/jquery.form.js')
+  script.
+    function limitInput () {
+
+      //先选出 textarea 和 统计字数 dom 节点
+      var wordCount = $("#abstract"),
+          textArea = wordCount.find("textarea"),
+          //word = wordCount.find(".word");
+          word = $('.word');
+      //调用
+      statInputNum(textArea, word);
+    };
+    /*
+     * 剩余字数统计
+     * 注意 最大字数只需要在放数字的节点哪里直接写好即可 如：<var class="word">200</var>
+     */
+    function statInputNum(textArea, numItem) {
+      var max = numItem.text(),
+              curLength;
+      textArea[0].setAttribute("maxlength", 100);
+      curLength = textArea.val().length;
+      numItem.text(max - curLength);
+      textArea.on('input propertychange', function () {
+        numItem.text(max - $(this).val().length);
+      });
+    }
+    var _edit =
+    {
+      IN: function (target, act) {
+        var obj=document.getElementById(target);
+        var tag =obj.firstChild.tagName;
+        if (typeof(tag) != "undefined" && (tag == "INPUT" || tag == "TEXTAREA"))return;
+        var org = obj.innerHTML;
+        var orglen = org.replace(/[^\x00-\xff]/g, '**').length;
+        if (obj.offsetHeight <= 22) {
+          var val = window.ActiveXObject ? obj.innerText : obj.textContent;
+          var txt = document.createElement("TEXTAREA");
+          txt.value = val;
+          txt.style.background = "#FFC";
+          txt.style.width = obj.offsetWidth + "px";
+          obj.innerHTML = "";
+          obj.appendChild(txt);
+          txt.focus();
+          txt.onblur = function (e) {
+            obj.innerHTML = txt.value;
+            _edit.QUERY(act, txt.value)
+            return false;
+          }
+          return false;
+        } else {
+          var content = obj.innerHTML;
+          var html = document.createElement('TEXTAREA');
+          html.style.width = obj.offsetWidth + "px";
+          html.style.height = obj.offsetHeight + "px";
+          obj.innerHTML = "";
+          html.value = content;
+          obj.appendChild(html);
+          html.focus();
+          html.onblur = function (e) {
+            obj.innerHTML = html.value;
+            _edit.QUERY(act, obj.innerHTML)
+          }
+          return false;
+        }
+      },
+      QUERY: function (url, postData) {
+        var _csrf = $("#_csrf").attr("value");
+        $.post(url, {data: postData, _csrf: _csrf})
+                .success(function (e) {
+                  if (e.update) {
+
+                  }
+                })
+                .error(function (e) {
+                    alert('cheonggo'+e);
+                })
+                .complete(function () {
+
+                });
+      },
+
+      ADD: function (target) {
+        if(document.getElementById("editor") ) {
+          $("#editorcontainer").css("display","block");
+          $('.edit').toggle();
+          $('.save').toggle();
+          return;
+        }
+
+        $(target).after('<div id="editorcontainer"><textarea id="editor" class="editor" placeholder="追加内容..." maxlength="200"></textarea></div>');
+        $.getScript('/plugin/editor/js/comment.js', function () {
+        })
+        $('.edit').toggle();
+        $('.save').toggle();
+      },
+
+      SAVE: function (target,url) {
+        var value = document.getElementById("editor").value.trim();
+        var data = '<br><span style="display: block;border:1px dotted #D3D3D3;">'+value+'</span>';
+        $('.edit').toggle();
+        $('.save').toggle();
+        $("#editorcontainer").css("display","none");
+        document.getElementById("editor").value="";
+        var _csrf = $("#_csrf").attr("value");
+        $.post(url, {data: data, _csrf: _csrf})
+                .success(function (e) {
+                  if (e.update) {
+                    $(target).after(data);
+                  }
+                })
+                .error(function () {
+                  alert('更新失败，刷新试试？');
+                })
+                .complete(function () {
+
+                });
+      }
+
+    }
+
+    var editContent = _edit.IN;
+    // -->
+
+

@@ -1,0 +1,82 @@
+extends ../layout
+block head
+  //link(rel='stylesheet', href='/plugin/bootstrap/css/bootstrapValidator.css') 要不要无妨碍 不要为好
+block content
+  .container.main(style="padding:15px 30px;")
+    .row
+      // form:
+      section
+        .col-lg-8.col-lg-offset-2
+          .page-header
+            h4 忘记密码
+          form#signupForm.form-horizontal(method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .alert.alert-success(style='display: none;')
+            .form-group
+              label.col-lg-3.control-label
+                | Email 地址
+                sup *
+              .col-lg-5
+                input.form-control(placeholder="填写注册邮箱，用于登陆和找回密码", name='email',type="email" ,required='',data-bv-notempty-message='邮箱地址不能为空' data-bv-emailaddress-message="email地址不合法",data-bv-stringlength="true" data-bv-stringlength-min="10" data-bv-stringlength-max="30",data-bv-stringlength-message="邮箱地址太长或太短啦" )
+              .col-lg-2
+                button.btn.btn-link(type='button', data-toggle='#username') 自定义用户名/可选
+
+            #username(style='display: none;')
+              .form-group
+                label.col-lg-3.control-label 用户名
+                .col-lg-5
+                  input.form-control(placeholder="取个名字吧" ,type='text', name='name', required='',data-bv-notempty-message="用户名不能为空",data-bv-stringlength="true" data-bv-stringlength-min="2" data-bv-stringlength-max="10",data-bv-stringlength-message="用户名不少于2位 不多于10位")
+                .col-lg-2
+                  button.btn.btn-link(type='button', data-toggle='#location') 填写更多内容/可选
+            #location(style='display: none;')
+              .form-group
+                label.col-lg-3.control-label
+                  | 地址
+                .col-lg-5
+                  input.form-control(placeholder="您的地址" ,type='text', name='location',required="",data-bv-notempty-message='不能为空，如果没有地址，请删除信息')
+              .form-group
+                label.col-lg-3.control-label 性别
+                .col-lg-5
+                  .radio
+                    label
+                      input(type='radio', name='gender', value='male',required data-bv-notempty-message="请选择您的性别")
+                      |  男
+                  .radio
+                    label
+                      input(type='radio', name='gender', value='female')
+                      |  女
+            .form-group
+              label.col-lg-3.control-label 密码
+                sup *
+              .col-lg-5
+                input.form-control(placeholder="登陆密码",type='password', name='password',data-bv-stringlength="true" data-bv-stringlength-min="6" data-bv-stringlength-max="30",data-bv-stringlength-message="密码长度不得短于6位 不得超过30位", required='', data-bv-notempty-message='密码不能为空', data-bv-identical='true', data-bv-identical-field='confirmPassword', data-bv-identical-message='两次密码不一样', data-bv-different='true', data-bv-different-field='email', data-bv-different-message='密码不得与邮箱同样')
+            .form-group
+              label.col-lg-3.control-label 确认密码
+                sup *
+              .col-lg-5
+                input.form-control(placeholder="确认密码",type='password', name='confirmPassword', required='', data-bv-notempty-message='密码不能为空', data-bv-identical='true', data-bv-identical-field='password', data-bv-identical-message='两次密码不一样', data-bv-different='true', data-bv-different-field='email', data-bv-different-message='密码不得与邮箱同样')
+
+            .form-group
+              .col-lg-9.col-lg-offset-3
+                button.btn.btn-success(type='submit')
+                  i.fa.fa-user-plus
+                  | 注册
+
+
+block script
+  script(type='text/javascript', src='/plugin/bootstrap/js/bootstrapValidator.min.js')
+  script(type='text/javascript').
+    $(document).ready(function () {
+      $('#signupForm')
+              .bootstrapValidator();
+
+
+      $('button[data-toggle]').on('click', function () {
+        var $target = $($(this).attr('data-toggle'));
+        $target.toggle();
+        if (!$target.is(':visible')) {//如果是不可见
+          // Enable the submit buttons in case additional fields are not valid
+          $('#signupForm').data('bootstrapValidator').disableSubmitButtons(false);
+        }
+      });
+    });

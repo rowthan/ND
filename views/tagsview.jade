@@ -1,0 +1,84 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='/css/tag.min.css')
+  //link(rel='stylesheet', href='/css/tidy.min.css')
+block content
+  .container(style="margin-top:60px")
+    .row
+      .col-md-7
+        .filter-rows
+          .label 分类：
+          #type.tag
+            a( href="/tagsview" class=tag== '' ? 'active' : undefined) 全部
+            - for (var i = 0; i < 20; ++i) {
+              a(href="/tagsview/?tag=#{tags[i].name}" data-value='0' class=tag == '#{tags[i].name}' ? 'active' : undefined) #{tags[i].name}
+            - }
+            span.hidden_tags(style="display:none;")
+              - for (var i = 20; i < tags.length; ++i) {
+                a(href="/tagsview/?tag=#{tags[i].name}" data-value='0' class=tag == '#{tags[i].name}' ? 'active' : undefined) #{tags[i].name}
+              - }
+            //each  item in tags
+            //  a(href="/tagsview/?tag=#{item.name}" data-value='0' class=tag == '#{item.name}' ? 'active' : undefined) #{item.name}
+          span.showtags
+            a(href="javascript:;") 显示所有标签
+      .col-md-5
+        .filter-search
+          .search-cont
+            .icon.icon-search
+            form(method="get")
+              input#search(type='text',name='tag' placeholder='#{tag}')
+          .labels
+            i 热搜：
+            a(href='/tagsview?tag=NodeJs') NodeJs
+            a(href='/tagsview?tag=世界') 世界
+            a(href='/tagsview?tag=梦想') 梦想
+
+    .wrap
+      .row
+        .a
+          .a-1.col-md-2 所有文章
+          .a-2.col-md-2(data-team='1', data-title='')
+            //| 最多回复（
+            //span.tb ---
+            //| ）
+          .a-2.col-md-2(data-team='2', data-title='')
+            //| 最多浏览（
+            //span.alloy ---
+            //| ）
+          .a-2(data-team='3', data-title='')
+            //| 最多喜欢（
+            //span._360 ---
+            //| ）
+      .row
+        .list
+          .h.hidden-xs
+            .h-1
+              b 标题
+            .h-2
+              b 摘要
+            .h-3
+              b 浏览量
+            .h-4
+              b 分类
+            .h-5
+              b 作者
+          if !tagid
+            p 该标签不存在 建立一个?
+          if tag_post
+            each item in tag_post
+              .item
+                a.item-1(href='/detail/#{item._id}') #{item.posttitle}
+                a.item-2(href='/detail/#{item._id}').hidden-xs !{item.abstract}
+                .h-3.hidden-xs #{item.pv}
+                .h-4.hidden-xs
+                  each tag in item.tags
+                    !{tag.name}
+                .h-5.hidden-xs #{item.userId.profile.name}
+          else
+            p 没有发现
+block script
+  script(type='text/javascript').
+    $('.showtags').on('click', function () {
+      $('.hidden_tags').toggle();
+    });

@@ -1,0 +1,52 @@
+.latestpost(style='position:relative')
+  .left.col-md-1.col-xs-2
+    .username
+      // .name(style="") #{item.userId.profile.name}
+      img(style='max-length:60px;overflow:hidden', src='http://7xr4l3.com1.z0.glb.clouddn.com/国士无双1463974750272?imageView2/1/w/50/h/50', alt='国士无双 ')
+      .userinfo(style='z-index:2;padding:5px;border:1px solid #f8f8f8;box-shadow: 0 0 1px #DCDCDE;;border-radius:5px;width:300px;height:125px;background-color:rgba(255,255,255,0.9);position:absolute;top:0px;display:none;')
+        a(href='javascript:; ', style='position:absolute;top:-8px;right:-8px;background-color:#f1f2f3;width:16px;height:16px;border-radius:8px;text-align:center')
+          .fa.fa-close
+        .back(style='height:60px;background: url(../images/test_bck.jpg) no-repeat center ;background-size: cover;')
+          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/国士无双1463974750272?imageView2/1/w/50/h/50', style='width:60px;height:60px;float:left')
+          .fullname(style='background-color:rgba(255,255,255,0.8);height:60px')
+            b 国士无双
+            br
+            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+        .space(style='margin-top:5px;height:20px;background-color:') 帖子：20 空间
+        .focus(style='height:30px;background-color:#cccccc;padding:5px')
+          span 关注他 | 私信
+    .info
+      button.vote.rippler(postid='574fe64c9e5ebbc40e62c484', type='genius')
+        i.fa.fa-thumbs-up 0
+      button.vote.rippler(postid='574fe64c9e5ebbc40e62c484', type='crazy')
+        i.fa.fa-thumbs-down 0
+      .hidemenu(style='display:none')
+        button.rippler
+          i.fa.fa-eye 16
+        button.rippler
+          i.fa.fa-comments 4
+        button.rippler
+          i.fa.fa-share-alt
+      button.showinfo.rippler(style='margin-top:5px', postid='574fe64c9e5ebbc40e62c484')
+        i.fa.fa-angle-double-down
+  .right.col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+    .tag
+      a(href='/tagsview?tag=学习', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  学习
+      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+      i.fa.fa-angle-down(style='float:right')
+    a.posttitle(href='/detail/574fe64c9e5ebbc40e62c484') 脑洞数学题
+    .row.abstract
+      .col-md-9
+        span.rippler(postid='574fe64c9e5ebbc40e62c484') 求下面三角形的面积如图所示：AC=10，BD=6，求三角形面积...
+        a.more(href='/detail/574fe64c9e5ebbc40e62c484')
+          i.fa.fa-long-arrow-right 查看全部
+      .col-md-3
+        li(style='list-style:none')
+          img.img-responsive(src='http://7xr4l3.com1.z0.glb.clouddn.com/QQ截图20160602155403.jpg1464854066766?imageView2/2/w/600/h/300')
+    .row.postbody(style='display:none;background-color:#fafafa')
+    // .copyright(style="color:#777777;background-color:;margin-top:20px;font-size:12px") © 2016,
+    // span(style="background-color:#F4F4F4") #{item.userId.profile.name}
+    // | .作者保留权利
+  .corner(style='position:absolute;bottom:0;right:0; overflow:hidden;border-top:50px solid transparent;border-right:50px solid RGBa(204,204,204,0.8); box-shadow: 2px 2px 1px #DCDCDE;')
+  .fa.fa-fire(style='position:absolute;background-color:transparent;right:0;bottom:0')
+  .clear

@@ -1,0 +1,53 @@
+extends ../account/layout
+block content
+  .app-content(style="margin-top:50px")
+    .container-fluid
+      .row
+        table.table.table-hover.table-bordered
+          thead
+            tr
+              th 标题
+              th 作者
+              th 创建时间
+              th 更新时间
+              th 阅读数目
+              th 置顶
+              th 查看
+              th 修改
+              th 删除
+          tbody
+            each item in posts
+              tr(class="item-id-#{item._id}")
+                td #{item.posttitle}
+                td #{item.userId.profile.name}
+                td #{moment(item.createAt).format('MM/DD/YYYY')}
+                td #{moment(item.updateAt).format('MM/DD/YYYY')}
+                td #{item.pv}
+                td
+                  if item.front
+                    a(href="/admin/cancelfront?postid="+item._id)  取消置顶
+                  else
+                    a(href="/admin/setfront?postid="+item._id) 置顶
+                td
+                  a(href='/detail/#{item._id}', target="_blank") 查看
+                td
+                  a(href='/updatepost/#{item._id}', target="_blank") 修改
+                td
+                  button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除文章
+        //script(src="/js/admin.js")
+block script
+  script(type='text/javascript').
+    $('.del').on('click', function () {
+      var target = $(this)
+      var id = target.attr('data-id');
+      var parent = target.closest('tr');
+      $.ajax({
+          type: 'get',
+          url: '/admin/deletePost?id=' + id
+      }).done(function (ret) {
+          if (ret.code == 0) {
+              parent.remove();
+          }
+      })
+    });
+

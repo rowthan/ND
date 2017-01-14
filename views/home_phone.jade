@@ -1,0 +1,440 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    // 响应式必须
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no')
+    meta(name='csrf-token', content='CZOcicWweWvjU1EGYX27OgMY0PnAXB0u7zvT0=')
+    meta(name='baidu-site-verification', content='8zsdoId4SO')
+    meta(name='title', content='脑洞-好点子分享,脑洞搜索 - 脑洞首页 - 脑洞打开')
+    meta(name='keywords', content='脑洞,脑洞一下,脑洞大开,脑洞分享')
+    meta(name='description', content='脑洞分享平台,提供脑洞分享,脑洞发掘,脑洞搜索')
+    title 脑洞网-手机-分享您的奇思妙想-脑洞一下
+    link(rel='stylesheet', href='/fonts/iconfont.css')
+    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='/css/responsive.min.css')
+    link(href='/fonts/font-awesome.css', rel='stylesheet')
+    link(rel='stylesheet', href='/css/home_phone.css')
+    // banner 图片滑动
+    link(href='/plugin/imagechange/css/twentytwenty.css', rel='stylesheet', type='text/css')
+    link(href='/plugin/rippler/jquery.ripple.css', rel='stylesheet', type='text/css')
+    link(href='/plugin/seedsui/seedsui.min.css', rel='stylesheet', type='text/css')
+    // 弹幕
+    link(href='/plugin/barrager/barrager.css', rel='stylesheet', type='text/css')
+  body
+    //
+      if lt IE 7
+      p.browsehappy
+      | 你正在使用一个
+      strong
+      | 过时
+      | 的浏览器。请到
+      a(href='http://browsehappy.com/')
+      | 这个网站
+      | 更新您的浏览器以便获取更好的视觉效果。
+    nav
+      a.navbar-brand(href='/')
+        i.fa.fa-cube naodong
+      //.setimg(style="display:inline-block;float:right;height:30px;") this is a test
+      a.doutu 逗图
+      a.video 视频
+      .setimg
+        input(type="checkbox" checked="checked")
+        label
+      a.user
+        i.fa.fa-user
+
+    .background.twentytwenty-container(style='position:fixed')
+      .htmleaf-container(style='position:fixed;height:100vh;width:100vw;z-index:1')
+      img(src='/img/header.png', style='width:100%;height:200px;')
+      img(src='/images/test_bck.jpg', style='width:100%;height:200px;z-index:0;')
+      h1(style='z-index:2;position:relative;')
+        a(href='') show me
+    section.content
+      header.column
+        ul#tabbar.tabbar.animate-slide(data-col='5')
+          li.tab.active
+            label.tab-label 最新
+          li.tab
+            label.tab-label 推荐
+          li.tab
+            label.tab-label 猎奇
+          li.tab
+            label.tab-label 理论
+          li.tab
+            label.tab-label 科技
+          hr
+      article(style='margin-top:40px')
+        #slider-container
+          .slider-wrapper
+            #latest.slider-slide
+              ul.list.latest
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg', alt='rowthan ')
+                      .userinfo(style='')
+                        a(href='javascript:;')
+                          .fa.fa-close
+                        .back
+                          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg')
+                          .fullname
+                            b rowthan
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid='576a5b410e2e7d500c6c5726', type='genius')
+                        i.fa.fa-thumbs-up 0
+                      button.vote.rippler(postid='576a5b410e2e7d500c6c5726', type='crazy')
+                        i.fa.fa-thumbs-down 0
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye 1
+                        button.rippler
+                          i.fa.fa-comments 0
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style='margin-top:5px', postid='576a5b410e2e7d500c6c5726')
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+                    .tag
+                      a(href='/tagsview?tag=boostrap', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  boostrap
+                      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style='float:right')
+                    a.posttitle(href='/detail/576a5b410e2e7d500c6c5726') 不要用响应式布局
+                    .row.abstract
+                      span(postid='576a5b410e2e7d500c6c5726') bootstrap对于前端技术的发展有阵很大的推动作用，但是真正在使用的过程中，还是会出现各种各样的问题。当然，毋庸置疑bootstrap很...
+                      a.more(href='/detail/576a5b410e2e7d500c6c5726')
+                        i.fa.fa-long-arrow-right 查看全部
+                    .postbody
+                  .corner
+                .clear
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg', alt='rowthan ')
+                      .userinfo(style='')
+                        a(href='javascript:;')
+                          .fa.fa-close
+                        .back
+                          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg')
+                          .fullname
+                            b rowthan
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid='5764d5b401ec23f02c01bbc8', type='genius')
+                        i.fa.fa-thumbs-up 0
+                      button.vote.rippler(postid='5764d5b401ec23f02c01bbc8', type='crazy')
+                        i.fa.fa-thumbs-down 0
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye 3
+                        button.rippler
+                          i.fa.fa-comments 0
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style='margin-top:5px', postid='5764d5b401ec23f02c01bbc8')
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+                    .tag
+                      a(href='/tagsview?tag=VR', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  VR
+                      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style='float:right')
+                    a.posttitle(href='/detail/5764d5b401ec23f02c01bbc8') 为什么我不看好VR or AR
+                    .row.abstract
+                      span(postid='5764d5b401ec23f02c01bbc8')        今年最热的话题当中，不得不提的必有VR。      &n...
+                      a.more(href='/detail/5764d5b401ec23f02c01bbc8')
+                        i.fa.fa-long-arrow-right 查看全部
+                    .postbody
+                  .corner
+                .clear
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg', alt='rowthan ')
+                      .userinfo(style='')
+                        a(href='javascript:;')
+                          .fa.fa-close
+                        .back
+                          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg')
+                          .fullname
+                            b rowthan
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid='5757d449795ee7b8324f29da', type='genius')
+                        i.fa.fa-thumbs-up 0
+                      button.vote.rippler(postid='5757d449795ee7b8324f29da', type='crazy')
+                        i.fa.fa-thumbs-down 0
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye 5
+                        button.rippler
+                          i.fa.fa-comments 1
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style='margin-top:5px', postid='5757d449795ee7b8324f29da')
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+                    .tag
+                      a(href='/tagsview?tag=json', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  json
+                      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style='float:right')
+                    a.posttitle(href='/detail/5757d449795ee7b8324f29da') 跨域请求
+                    .row.abstract
+                      span(postid='5757d449795ee7b8324f29da') res.jsonp({'Access-Control-Allow-Origin': '*',posts:posts})...
+                      a.more(href='/detail/5757d449795ee7b8324f29da')
+                        i.fa.fa-long-arrow-right 查看全部
+                    .postbody
+                  .corner
+                .clear
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg', alt='rowthan ')
+                      .userinfo(style='')
+                        a(href='javascript:;')
+                          .fa.fa-close
+                        .back
+                          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg')
+                          .fullname
+                            b rowthan
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid='574db4f8caf6cc643a64ffcd', type='genius')
+                        i.fa.fa-thumbs-up 0
+                      button.vote.rippler(postid='574db4f8caf6cc643a64ffcd', type='crazy')
+                        i.fa.fa-thumbs-down 1
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye 15
+                        button.rippler
+                          i.fa.fa-comments 1
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style='margin-top:5px', postid='574db4f8caf6cc643a64ffcd')
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+                    .tag
+                      a(href='/tagsview?tag=插件', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  插件
+                      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style='float:right')
+                    a.posttitle(href='/detail/574db4f8caf6cc643a64ffcd') 一些插件
+                    .row.abstract
+                      span(postid='574db4f8caf6cc643a64ffcd') 轮播或者手机滑动插件 有 touchslider 功能比较单一 api也不够清楚 但是比较小巧 只有十几k比较好的是sw...
+                      a.more(href='/detail/574db4f8caf6cc643a64ffcd')
+                        i.fa.fa-long-arrow-right 查看全部
+                    .postbody
+                  .corner
+                .clear
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg', alt='999 ')
+                      .userinfo(style='')
+                        a(href='javascript:;')
+                          .fa.fa-close
+                        .back
+                          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg')
+                          .fullname
+                            b 999
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid='571af16c50361b2c26aa8dad', type='genius')
+                        i.fa.fa-thumbs-up 0
+                      button.vote.rippler(postid='571af16c50361b2c26aa8dad', type='crazy')
+                        i.fa.fa-thumbs-down 0
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye 11
+                        button.rippler
+                          i.fa.fa-comments 2
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style='margin-top:5px', postid='571af16c50361b2c26aa8dad')
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+                    .tag
+                      a(href='/tagsview?tag=npm', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  npm
+                      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style='float:right')
+                    a.posttitle(href='/detail/571af16c50361b2c26aa8dad') nodejs超级好的模块
+                    .row.abstract
+                      span(postid='571af16c50361b2c26aa8dad') nullnode-notifier用户桌面提醒功能 脱离浏览器的限制 与socket做实时聊天最好不过了...
+                      a.more(href='/detail/571af16c50361b2c26aa8dad')
+                        i.fa.fa-long-arrow-right 查看全部
+                    .postbody
+                  .corner
+                .clear
+                li.latestpost
+                  .col-md-1.col-xs-2
+                    .username
+                      img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg', alt='rowthan ')
+                      .userinfo(style='')
+                        a(href='javascript:;')
+                          .fa.fa-close
+                        .back
+                          img(src='http://7xr4l3.com1.z0.glb.clouddn.com/qq.jpg')
+                          .fullname
+                            b rowthan
+                            br
+                            span 这个我的一段简介这个我的一段简介这个我的一段简介这个我的一段简介
+                        .space 帖子：20 空间
+                        .focus
+                          span 关注他 | 私信
+                    .info
+                      button.vote.rippler(postid='573b0d706a46813460d9a884', type='genius')
+                        i.fa.fa-thumbs-up 1
+                      button.vote.rippler(postid='573b0d706a46813460d9a884', type='crazy')
+                        i.fa.fa-thumbs-down 0
+                      .hidemenu
+                        button.rippler
+                          i.fa.fa-eye 67
+                        button.rippler
+                          i.fa.fa-comments 11
+                        button.rippler
+                          i.fa.fa-share-alt
+                      button.showinfo.rippler(style='margin-top:5px', postid='573b0d706a46813460d9a884')
+                        i.fa.fa-angle-double-down
+                  .col-md-11.col-xs-10(style='padding-left:5px;height:100%;')
+                    .tag
+                      a(href='/tagsview?tag=有趣', style='background-color:#EFF6FA;border-radius:3px;margin:0 3px;padding:2px')  有趣
+                      // i.fa.fa-eye-slash(style="float:right;margin-left:4px") #{moment(item.updateAt).format('MM/DD-HH:mm')}
+                      i.fa.fa-angle-down(style='float:right')
+                    a.posttitle(href='/detail/573b0d706a46813460d9a884') 记一些网站地址
+                    .row.abstract
+                      span(postid='573b0d706a46813460d9a884') http://www.3lian.com/edu/2009/09-21/87523365703668.html...
+                      a.more(href='/detail/573b0d706a46813460d9a884')
+                        i.fa.fa-long-arrow-right 查看全部
+                    .postbody
+                  .corner
+                .clear
+                .load.txtcenter
+                  a(href='javascript:;') 加载更多
+                img.loading.hidden(src='//images/ajax-loader.gif')
+                .nodata.txtcenter.hidden 已经到底了
+            #5754eaef44af3bb828bf07a3.slider-slide
+              ul.list
+                li.noclick
+                  .justify
+                    span.peg
+                  .justify-content 最新
+            #575500898e26fa8051e36a43.slider-slide
+              ul.list
+                li.noclick
+                  .justify
+                    span.peg
+                  .justify-content 最新
+            #575538c3f57daba82f20d1af.slider-slide
+              ul.list
+                li.noclick
+                  .justify
+                    span.peg
+                  .justify-content 最新
+            #575538d3f57daba82f20d1b0.slider-slide
+              ul.list
+                li.noclick
+                  .justify
+                    span.peg
+                  .justify-content 最新
+    style(type='text/css').
+      /*图片查看器*/
+      .modal-dialog img {
+        text-align: center;
+        margin: 0 auto;
+      }
+      .controls {
+        width: 50px;
+        display: block;
+        font-size: 11px;
+        padding-top: 8px;
+        font-weight: bold;
+      }
+      .next {
+        float: right;
+        text-align: right;
+      }
+      /*end 图片查看*/
+    .scroll
+      .toTop.hidden-xs
+        .fa.fa-chevron-up
+      .micmenubtn
+        .fa.fa-bars
+      .toBotm.hidden-xs
+        .fa.fa-chevron-down
+    .micmenu
+      .refresh
+        a(href='javascript:location.reload();')
+          .fa.fa-refresh
+      .edit
+        a(href='/post')
+          .fa.fa-edit
+      .user
+        a(href='/account')
+          .fa.fa-user
+    // 图片查看器
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-body
+        // /.modal-content
+      // /.modal-dialog
+    // /.modal
+    // 模态框登录
+    .theme-popover
+      .theme-poptit
+        a.close(href='javascript:;', title='关闭') ×
+        h3 登录 是一种态度
+      .theme-popbod.dform
+        form.theme-signin(name='login', action='/login', method='post')
+          ol
+            li
+              h4 你必须先登录！
+              input(type='hidden', name='_csrf', value='CZOcicWweWvjU1EGYX27OgMY0PnAXB0u7zvT0=')
+            li
+              strong 用户名：
+              input.ipt(type='text', name='email', placeholder='用户名或邮箱', size='20')
+            li
+              strong 密码：
+              input.ipt(type='password', name='password', placeholder='密码', size='20')
+            li
+              input.btn.btn-primary(type='submit', name='submit', value=' 登 录 ')
+    .theme-popover-mask
+    // 登录 end
+    // footer
+    // .bottom(style="border-top:1px solid #dddddd;padding-top:5px;")
+    // .link.txtcenter link
+    // .glyphicon-copyright-mark.txtcenter Copyright © 2016 .com Inc. All Rights Reserved.
+    // .contact.txtcenter  请仔细阅读 版权声明 、反盗版和反盗链权利声明 举报邮箱：.com
+    // script(src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js')
+    script(src='http://libs.useso.com/js/jquery/2.1.1/jquery.min.js')
+    script(src='http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js')
+    script(src='/js/main.js')
+    script(src='/js/home_phone.js')
+    script(src='/plugin/imagechange/js/jquery.event.move.js')
+    script(src='/plugin/imagechange/js/jquery.twentytwenty.js')
+    // 水纹
+    script(src='/plugin/rippler/jquery.ripple.js')
+    // tab slide
+    script(src='/plugin/seedsui/seedsui.min.js')
+    // 弹幕
+    //script(src='/plugin/barrager/jquery.barrager.js')

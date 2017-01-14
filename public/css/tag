@@ -1,0 +1,180 @@
+// Color variables (appears count calculates by raw css)
+@color0: #cccccc; // Appears 4 times
+@color1: #d2e4e0; // Appears 2 times
+@color2: #666666; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width0: 490px; // Appears 2 times
+@width3: 260px; // Appears 2 times
+
+
+input {
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  outline: 0;
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+.a-1, .h-3, .h-4, .h-5  {
+  text-align: center;
+}
+.filter-search {
+  float: right;
+  width: 400px;
+  .search-cont {
+    height: 36px;
+    margin-top: 20px;
+    position: relative;
+    .icon {
+      -o-transition: all .45s linear .15s;
+      -webkit-transition: all .45s linear .15s;
+      background: #EAF6F5;
+      border-left: 1px solid @color1;
+      border-radius: 0 4px 4px 0;
+      color: #8AB3AA;
+      cursor: pointer;
+      font-size: 14px;
+      height: 34px;
+      line-height: 36px;
+      position: absolute;
+      right: 56px;
+      text-align: center;
+      top: 1px;
+      transition: all .45s linear .15s;
+      width: 45px;
+      z-index: 111;
+    }
+    input {
+      -o-transition: all .45s linear .15s;
+      -webkit-transition: all .45s linear .15s;
+      background: 0 0;
+      border-radius: 4px;
+      border: 1px solid @color1;
+      box-shadow: 1px 1px 1px rgba(255,255,255,.6) inset;
+      color: #C9DBDB;
+      height: 100%;
+      left: 50%;
+      margin-left: -145px;
+      padding: 8px 30px 8px 10px;
+      position: absolute;
+      transition: all .45s linear .15s;
+      width: 290px;
+    }
+  }
+  .labels {
+    font-size: 12px;
+    padding-left: 65px;
+    padding-top: 3px;
+    i {
+      font-style: normal;
+      font-weight: 700;
+    }
+    a {
+      color: #A5AFAE;
+      margin-right: 10px;
+    }
+  }
+}
+
+.a-1 {
+  border-right: 1px solid @color0;
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 20px;
+  padding: 0 20px 0 30px;
+}
+.a-2 {
+  -o-transition: all .35s ease-out;
+  -webkit-transition: all .35s ease-out;
+  color: #9E9090;
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px 10px;
+  text-shadow: 1px 1px 3px #B3B9B5;
+  transition: all .35s ease-out;
+  &:hover {
+    background: rgba(189,234,192,.35);
+    border-radius: 3px;
+    color: #5C636D;
+    text-shadow: 1px 1px 3px #6B6161;
+  }
+}
+.icon-search {
+  &:before {
+    content: "\f002";
+  }
+}
+button {
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+.h-1, .h-2, .h-3, .h-4, .h-5, .item-1, .item-2  {
+  -ms-text-overflow: ellipsis;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wrap {
+  background: #ffffff;
+  margin-top: 5px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.a {
+  background: #fafcfe;
+  border-radius: 3px;
+  border: 1px solid @color0;
+  padding: 8px;
+}
+.item-1 {
+  color: @color2;
+  display: block;
+  padding-left: 10px;
+  width: @width3;
+}
+.item-2 {
+  padding-left: 10px;
+  width: @width0;
+}
+.list {
+  border-radius: 2px;
+  border: 1px solid @color0;
+  margin-top: 15px;
+}
+.h {
+  background: #fafafa;
+  height: 40px;
+  line-height: 40px;
+}
+.h-1 {
+  padding-left: 30px;
+  width: @width3;
+}
+.h-2 {
+  padding-left: 20px;
+  width: @width0;
+}
+.h-3 {
+  width: 60px;
+}
+.h-4 {
+  width: 88px;
+}
+.h-5 {
+  width: 100px;
+}
+.item {
+  border-top: 1px solid @color0;
+  color: @color2;
+  height: 30px;
+  line-height: 30px;
+  &:hover {
+    background: #eeeeee;
+  }
+}

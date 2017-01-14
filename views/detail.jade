@@ -1,0 +1,175 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/css/detail.css')
+  link(rel='stylesheet', type='text/css', href='/plugin/editor/css/wysiwyg-editor.css')
+  link(href='/plugin/editor/css/demo.css', rel='stylesheet', type='text/css')
+  style.
+    body {
+      line-height: 1.2em;
+      background-image: url(../img/soft_wallpaper.png);
+      background-repeat: repeat;
+      background-attachment: fixed;
+      background-position: 0px 0px;
+      /*color: #444;*/
+      height: 100%;
+      width: auto;
+    }
+
+block content
+  .container-fluid(style="background-color:pink;max-width: 800px; margin:50px auto; background: #fff; position: relative;")
+    .row
+      .cont-left.col-xs-12(style="box-shadow: 0 0 4px #B0B0B0;margin:0;")
+        .postbody(style="padding: 2% 3% 0;background-color:;position:relative")
+          if (user &&(user._id.toString()==post.userId._id.toString()))
+            h1(style=";position:absolute;top:3px;right:3px;")
+              a.edit(style="border:0;background:none;color:red" href="/updatepost/#{post._id}")
+                i.fa.fa-edit
+          h1.visible-md.visible-lg(style="z-index:100")
+            a.vote(href="javascript:" type="genius" style="position:fixed;left:100px;top:100px;background: rgba(224,233,239,.5)")
+              i.fa.fa-hand-grab-o 天才
+              span #{post.genius_count}
+            a.vote(href="javascript:" type="crazy" style="position:fixed;right:100px;top:100px")
+              i.fa.fa-thumbs-o-down 疯子
+              span #{post.crazy_count}
+            a.daziji(href="javascript:" style="position:fixed;right:100px;top:150px")
+              i.fa.fa-thumbs-o-down 打字机
+          h1.visible-xs(style="z-index:100")
+            a.vote(href="javascript:" type="genius" style="position:fixed;right:10px;top:150px;")
+              i.fa.fa-hand-grab-o
+              span #{post.genius_count}
+            a.vote(href="javascript:" type="crazy" style="position:fixed;right:10px;top:200px")
+              i.fa.fa-thumbs-o-down
+              span #{post.crazy_count}
+          #postid(style="display:none") #{post._id}
+
+          h1 #{post.posttitle}
+          .info
+            i 时间：
+            span  #{moment(post.createAt).format('MM/DD/YYYY-HH:mm')}
+            i 作者：
+            span
+              a(href='/userinfo/#{post.userId._id}') #{post.userId.profile.name}
+            i 标签：
+            span
+              each item in post.tags
+                span
+                  a(href='/tagsview/?tag=#{item.name}')
+                    | #{item.name}
+            i 浏览量：
+            span(style='font-family:Georgia;font-size:15px;') #{post.pv}
+
+            a.collect(href="javascript:")
+              i.fa.fa-star-o 收藏
+            .font(style="border:0;background:none;color:red;font-size:8px;" )
+              a(href="#test" onclick="doZoom('test',25)")
+                i.fa.fa-font.fa-lg
+              a(href="javascript:;")
+                i.fa.fa-font.fa-2x
+
+          .contents(style="background-color:") !{post.postbody}
+          .copyright(style="color:#777777;background-color:;margin-top:20px") Copyright © 2016,
+            span(style="background-color:#F4F4F4") #{post.userId.profile.name}
+            |. 作者保留权利
+          .last(style="background-color:")
+            .prev 上一篇：没有了
+            if user
+              a.like(href="javascript:")
+                | 喜欢（
+                span #{post.like_count}
+                | ）
+            else
+              a.like
+                | 喜欢（
+                span #{post.like_count}
+                | ）
+            .next 下一篇：没有了
+        .panel(style="background-color:;padding:0")
+          //.panel-heading
+          //  h3 评论如下
+          .panel-body(style="background-color:;padding:0")
+            .in2(style="background-color:;")
+              h4
+                | 讨论
+                span.z14 获得经验
+              each item in comments
+                .pl.postbody
+                  .tx
+                    a(href='/userinfo/#{item.from._id}')
+                      img(src="#{item.from.profile.picture}")
+                  li.plbg(style="position:relative")
+                    .f
+                      | #{item.from.profile.name}
+                      span.jl 0
+                    .r
+                      span.z12 #{moment(item.createAt).format('MM/DD-HH:mm')}
+                      a.agree.fa.fa-thumbs-up(href="javascript:", commentid=item._id)
+                        span #{item.agree.length}
+                    .dr
+                  p(style="text-indent:2em;word-wrap: break-word;")
+                    | !{item.content}
+                    a.hf.comment(href="javascript::", data-cid="#{item._id}",data-tid="#{item.from._id}")  回复
+                  if(item.reply && item.reply.length > 0)
+                    each reply in item.reply
+                      .media
+                        .pull-left
+                          a.hf.comment(href="javascript::",data-cid="#{item._id}",data-tid="#{reply.from._id}")
+                            img.media-object(src="#{reply.from.profile.picture}",style="width:20px;height:20px;")
+                        .media-body
+                          h5.media-heading #{reply.from.profile.name}
+                            span.text-info &nbsp;回复&nbsp;
+                            | #{reply.to.profile.name}
+                            //if(user && (reply.from._id.toString() == user._id.toString()))
+                            //  a(href="")
+                            //    span(style="float:right") 删除回复
+                          p !{reply.content}
+                    .dr
+                a(name='anchor')
+                .df.dr
+            form#commentForm(method="POST", action="/comment")
+              .form-group.win8(style="margin:0px auto;position:relative;")
+                textarea#editor(name='comment[content]', placeholder='输入内容...',maxlength="200")
+                if !user
+                  #mask.theme-login(style="position:absolute;top:0;width:100%;height:100%;background: rgba(255,255,255,.5);")
+                    a.navbar-link.theme-login(href="javascript:;"  style="position:absolute;top:50%;right:50%") 登录后评论
+              if user
+                input(type="hidden",name="comment[post]", value="#{post._id}")
+                input(type='hidden',id='_csrf', name='_csrf', value=_csrf)
+                input(type="hidden", name="comment[from]", value="#{user._id}")
+
+                button.btn.btn-primary.top10(type='submit' style="float:right") 回复
+
+              //p the time is #{Date.now() - starttime}
+
+block script
+  script(src = "/js/detail.js")
+
+  script(type = 'text/javascript', src = '/plugin/editor/js/wysiwyg.min.js')
+  script(type = 'text/javascript', src = '/plugin/editor/js/wysiwyg-editor.min.js')
+  script(type = 'text/javascript', src = '/plugin/editor/js/comment.js')
+  script(type = 'text/javascript', src = 'http://malsup.github.com/jquery.form.js')
+  script.
+    $('.daziji').click(function () {
+      $('#test').toggle();
+      var str = $("#test").html().replace(/<\/?.+?>|&nbsp;/gi,"");
+      text(str);
+    })
+
+    function text(str) {
+      var arr = [];
+      var text = document.getElementsByClassName("text")[0];
+      for (var i = 0; i < str.length; i++) {
+        arr[i] = str[i];
+      }
+      var p = document.createElement("p");
+      text.appendChild(p);
+      var index = 0;
+      var obj = setInterval(function () {
+        if (index < arr.length) {
+          var text = document.createTextNode(arr[index]);
+        }
+        p.appendChild(text);
+        index++;
+      }, 100);
+    }
+
+
